@@ -15,4 +15,4 @@ MonoBehaviour:
   Rate: 1
   Material: {fileID: 2100000, guid: 1199fe41a4a4ea74383cbd9545f86a58, type: 2}
   Mesh: {fileID: 4300018, guid: e5326b54f49cc50479cbf8508dc0e805, type: 3}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}

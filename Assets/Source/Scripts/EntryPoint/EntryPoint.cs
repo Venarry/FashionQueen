@@ -7,6 +7,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private LevelSpawner _levelSpawner;
     [SerializeField] private StartPointHandler _startPointHandler;
+    [SerializeField] private EndLevelHandler _endLevelHandler;
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class EntryPoint : MonoBehaviour
 
         _clothPanelHandler.Enable();
         _startPointHandler.Enable();
+        _endLevelHandler.Enable();
 
         _levelSpawner.Spawn();
         _player.CharacterMover.GoToStartPoint();
@@ -23,5 +25,6 @@ public class EntryPoint : MonoBehaviour
     {
         _clothPanelHandler.Disable();
         _startPointHandler.Disable();
+        _endLevelHandler.Disable();
     }
 }

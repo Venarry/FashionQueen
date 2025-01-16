@@ -5,19 +5,17 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class EndLevelActionButton : MonoBehaviour
 {
-    private Button _button;
-    private int _actionIndex;
+    [SerializeField] private Button _button;
+    [SerializeField] private Image _icon;
+
+    public string ActionAnimationName { get; private set; }
 
     public event Action<EndLevelActionButton> Clicked;
 
-    private void Awake()
+    public void Init(string animationName, Sprite icon)
     {
-        _button = GetComponent<Button>();
-    }
-
-    public void Init(int index)
-    {
-        _actionIndex = index;
+        ActionAnimationName = animationName;
+        _icon.sprite = icon;
     }
 
     private void OnEnable()
