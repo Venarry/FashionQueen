@@ -49,10 +49,8 @@ public class CharacterMover : MonoBehaviour
                     ReachedNewStage?.Invoke();
                     continue;
                 }
-                //if (i >= _movePoints.Length - 1)
-                //{
-                //}
 
+                _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
                 ReachedFinish?.Invoke();
             }
             catch { }

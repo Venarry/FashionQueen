@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
+  m_Name: AiShoes
+  m_EditorClassIdentifier: 
+  Rate: 1
+  Material: {fileID: 2100000, guid: 02aef437973d7db448f1140c15593e68, type: 2}
+  Mesh: {fileID: 4300022, guid: e5326b54f49cc50479cbf8508dc0e805, type: 3}
+  Icon: {fileID: 0}

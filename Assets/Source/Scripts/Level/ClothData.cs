@@ -2,7 +2,8 @@
 using UnityEngine;
 
 [Serializable]
-public class ClothData
+[CreateAssetMenu(fileName = "NewClothData", menuName = "ScriptableObjects/ClothData", order = 2)]
+public class ClothData : ScriptableObject
 {
     [Range(1, 5)] public int Rate;
     public Material Material;

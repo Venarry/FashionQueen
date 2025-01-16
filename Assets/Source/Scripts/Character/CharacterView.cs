@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterView : MonoBehaviour
@@ -9,8 +10,10 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _skirt;
     [SerializeField] private SkinnedMeshRenderer _shoes;
 
+    private readonly Dictionary<int, int> _rate = new();
     private Dictionary<int, Action<int, Material, Mesh, int>> _setActions;
-    private Dictionary<int, int> _rate = new();
+
+    public Dictionary<int, int> Rate => _rate.ToDictionary(c => c.Key, c => c.Value);
 
     private void Awake()
     {
