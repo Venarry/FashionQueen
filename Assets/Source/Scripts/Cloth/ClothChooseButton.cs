@@ -30,7 +30,6 @@ public class ClothChooseButton : MonoBehaviour
         Mesh = mesh;
         Rate = rate;
         ClothIndex = clothIndex;
-        //_image.sprite = sprite;
     }
 
     private void OnButtonClick()

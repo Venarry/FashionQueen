@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EndLevelHandler : MonoBehaviour
@@ -13,8 +11,15 @@ public class EndLevelHandler : MonoBehaviour
         _playerMover.ReachedFinish += OnFinishReach;
     }
 
-    private void OnFinishReach()
+    public void Disable()
     {
+        _playerMover.ReachedFinish -= OnFinishReach;
+    }
 
+    private async void OnFinishReach()
+    {
+        _camera.GoToEndPoint();
+
+        await Task.Delay(500);
     }
 }
