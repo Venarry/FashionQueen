@@ -18,8 +18,8 @@ public class ClothPanelHandler : MonoBehaviour
 
     private readonly List<ClothChooseButton> _spawnedButtons = new();
     private Character _enemy;
-    private ClothData[][] _clothes;
-    private ClothData[] _currentStageCloth;
+    private ClothWithRateData[][] _clothes;
+    private ClothWithRateData[] _currentStageCloth;
     private int _stageCounter = 0;
     private readonly float _showTime = 5;
     private readonly float _timeScale = 0.2f;
@@ -40,7 +40,7 @@ public class ClothPanelHandler : MonoBehaviour
         _player.CharacterMover.ReachedNewStage -= OnPointReach;
     }
 
-    public void SetData(ClothData[][] clothData)
+    public void SetData(ClothWithRateData[][] clothData)
     {
         _clothes = clothData;
         _stageCounter = 0;
@@ -88,8 +88,8 @@ public class ClothPanelHandler : MonoBehaviour
         }
 
         _activeShowing = null;
+        SetEnemyCloth();
         Hide();
-        GameTimeScaler.Remove(nameof(ClothPanelHandler));
     }
 
     private void Hide()
@@ -108,10 +108,10 @@ public class ClothPanelHandler : MonoBehaviour
         _buttonsParent.gameObject.SetActive(true);
         _timerImage.gameObject.SetActive(true);
 
-        foreach (ClothData cloth in _currentStageCloth)
+        foreach (ClothWithRateData cloth in _currentStageCloth)
         {
             ClothChooseButton button = Instantiate(_buttonPrefab, _buttonsParent);
-            button.Init(cloth.Material, cloth.Mesh, cloth.Rate, _stageCounter, cloth.Icon);
+            button.Init(cloth.Data.Material, cloth.Data.Mesh, cloth.Rate, _stageCounter, cloth.Data.Icon);
             button.Clicked += OnClothButtonClick;
 
             _spawnedButtons.Add(button);
@@ -141,9 +141,13 @@ public class ClothPanelHandler : MonoBehaviour
     {
         _player.CharacterView.Set(button.ClothIndex, button.Material, button.Mesh, button.Rate);
 
+        SetEnemyCloth();
+        Hide();
+    }
+
+    private void SetEnemyCloth()
+    {
         ClothChooseButton enemyButton = _spawnedButtons[Random.Range(0, _spawnedButtons.Count)];
         _enemy.CharacterView.Set(enemyButton.ClothIndex, enemyButton.Material, enemyButton.Mesh, enemyButton.Rate);
-
-        Hide();
     }
 }

@@ -7,8 +7,19 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public string LevelName;
-    public List<ClothData> Hair;
-    public List<ClothData> Dress;
-    public List<ClothData> Skirt;
-    public List<ClothData> Shoes;
+    [Range(0, 5)] public int StartHairRate;
+    [Range(0, 5)] public int StartDressRate;
+    [Range(0, 5)] public int StartSkirtRate;
+    [Range(0, 5)] public int StartShoesRate;
+    public List<ClothWithRateData> Hair;
+    public List<ClothWithRateData> Dress;
+    public List<ClothWithRateData> Skirt;
+    public List<ClothWithRateData> Shoes;
+}
+
+[Serializable]
+public class ClothWithRateData
+{
+    [Range(0, 5)] public int Rate;
+    public ClothData Data;
 }

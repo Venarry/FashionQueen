@@ -31,6 +31,14 @@ public class CharacterView : MonoBehaviour
         _setActions[index](index, material, mesh, rate);
     }
 
+    public void SetRates(Dictionary<int, int> rates)
+    {
+        foreach (KeyValuePair<int, int> rate in rates)
+        {
+            _rate[rate.Key] = rate.Value;
+        }
+    }
+
     public void SetHair(int index, Material material, Mesh mesh, int rate)
     {
         _hair.sharedMaterial = material;
