@@ -6,10 +6,17 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Character[] _prefabs;
-    [SerializeField] private Transform[] _movePoints;
 
+    private Transform[] _movePoints;
     private Character _activeCharacter;
+    private RateSmilesDataSource _rateSmilesDataSource;
     private readonly int _projectionDespawnDelay = 1000;
+
+    public void Init(RateSmilesDataSource rateSmilesDataSource, Transform[] points)
+    {
+        _rateSmilesDataSource = rateSmilesDataSource;
+        _movePoints = points;
+    }
 
     public async Task<Character> SpawnWithProjection(Vector3 position, Quaternion rotation, float speed)
     {
@@ -32,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
             await Task.Delay(_projectionDespawnDelay);
         }
 
-        _activeCharacter.Init(_movePoints, speed);
+        _activeCharacter.Init(_movePoints, speed, _rateSmilesDataSource);
         return _activeCharacter;
     }
 

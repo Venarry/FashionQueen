@@ -18,24 +18,24 @@ MonoBehaviour:
   StartSkirtRate: 3
   StartShoesRate: 5
   Hair:
-  - Rate: 0
-    Data: {fileID: 11400000, guid: d37b8a1f752c6834e85a883bf72814ba, type: 2}
   - Rate: 1
-    Data: {fileID: 11400000, guid: aa11fef7ac79a7d438f5a2c937271179, type: 2}
+    Data: {fileID: 11400000, guid: d37b8a1f752c6834e85a883bf72814ba, type: 2}
   - Rate: 2
+    Data: {fileID: 11400000, guid: aa11fef7ac79a7d438f5a2c937271179, type: 2}
+  - Rate: 3
     Data: {fileID: 11400000, guid: bc49947ecc5bac746bbf667467520c9c, type: 2}
   Dress:
-  - Rate: 1
-    Data: {fileID: 11400000, guid: 2d970a847af4f1b44abce174a8cc4057, type: 2}
   - Rate: 2
+    Data: {fileID: 11400000, guid: 2d970a847af4f1b44abce174a8cc4057, type: 2}
+  - Rate: 4
     Data: {fileID: 11400000, guid: 80873886e00981747b78df7dc16e437d, type: 2}
   Skirt:
   - Rate: 1
     Data: {fileID: 11400000, guid: 68c0643e51059a349b5444b15d4fb241, type: 2}
-  - Rate: 2
+  - Rate: 3
     Data: {fileID: 11400000, guid: c4528b8ad47939b4d904ff1da3d71535, type: 2}
   Shoes:
   - Rate: 1
     Data: {fileID: 11400000, guid: f8a38d909c352744db36f656c288f7cc, type: 2}
-  - Rate: 2
+  - Rate: 4
     Data: {fileID: 11400000, guid: 146dd36ada179cf4a856c261eaac8e54, type: 2}

@@ -13,6 +13,11 @@ public class LevelSpawner : MonoBehaviour
     {
         LevelData level = _levels[_activeLevelIndex];
 
+        foreach (ClothWithRateData item in level.Dress)
+        {
+            Debug.Log(item.Rate);
+        }
+
         _clothPanelHandler.SetData(new ClothWithRateData[][] 
         { 
             level.Hair.ToArray(),

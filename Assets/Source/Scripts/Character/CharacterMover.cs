@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CharacterMover : MonoBehaviour
 {
-    [SerializeField] private Transform[] _movePoints;
-    [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private StringAnimator _characterAnimator;
+    private Transform[] _movePoints;
+    private float _moveSpeed = 3f;
 
     public Vector3 Position => transform.position;
     public float MoveSpeed => _moveSpeed;

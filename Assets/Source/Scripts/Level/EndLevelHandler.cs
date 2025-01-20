@@ -31,8 +31,9 @@ public class EndLevelHandler : MonoBehaviour
 
     private async void OnFinishReach()
     {
-        ShowFirstPlayerClothRate();
-        ShowEnemyClothRate();
+        await ShowFirstPlayerClothRate();
+        await ShowEnemyClothRate();
+
         _camera.GoNext();
 
         await Task.Delay(500);
@@ -40,26 +41,36 @@ public class EndLevelHandler : MonoBehaviour
         ShowActionButtons();
     }
 
-    private async void ShowFirstPlayerClothRate()
+    private async Task ShowFirstPlayerClothRate()
     {
         _camera.GoNext();
+        await Task.Delay(500);
+
         Dictionary<int, int> rates = _player.CharacterView.Rate;
-        Debug.Log("Player");
-        foreach (KeyValuePair<int, int> item in rates)
+
+        for (int i = 0; i < _player.RateShower.RateCount; i++)
         {
-            Debug.Log(item.Value);
+            _player.RateShower.ShowNext();
+            await Task.Delay(1000);
         }
+
+        await Task.Delay(2000);
     }
 
-    private async void ShowEnemyClothRate()
+    private async Task ShowEnemyClothRate()
     {
         _camera.GoNext();
+        await Task.Delay(500);
+
         Dictionary<int, int> rates = _enemy.CharacterView.Rate;
-        Debug.Log("Enemy");
-        foreach (KeyValuePair<int, int> item in rates)
+
+        for (int i = 0; i < _enemy.RateShower.RateCount; i++)
         {
-            Debug.Log(item.Value);
+            _enemy.RateShower.ShowNext();
+            await Task.Delay(1000);
         }
+
+        await Task.Delay(2000);
     }
 
     private void ShowActionButtons()

@@ -9,9 +9,11 @@ public class Character : MonoBehaviour
     [field: SerializeField] public CharacterView CharacterView { get; set; }
     [field: SerializeField] public CharacterMover CharacterMover { get; set; }
     [field: SerializeField] public StringAnimator Animator { get; set; }
+    [field: SerializeField] public CharacterRateShower RateShower { get; set; }
 
-    public void Init(Transform[] points, float speed)
+    public void Init(Transform[] points, float speed, RateSmilesDataSource rateSmilesDataSource)
     {
         CharacterMover.Init(points, speed);
+        RateShower.Init(rateSmilesDataSource);
     }
 }

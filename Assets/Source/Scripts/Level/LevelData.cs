@@ -20,6 +20,6 @@ public class LevelData : ScriptableObject
 [Serializable]
 public class ClothWithRateData
 {
-    [Range(0, 5)] public int Rate;
+    [Range(1, 5)] public int Rate;
     public ClothData Data;
 }
