@@ -5,6 +5,7 @@ public class StartLevelHandler : MonoBehaviour
     [SerializeField] private ClickPanel _clickPanel;
     [SerializeField] private Character _player;
     [SerializeField] private GameObject _clickMessage;
+    [SerializeField] private LevelSpawner _levelSpawner;
 
     private void OnEnable()
     {
@@ -22,7 +23,7 @@ public class StartLevelHandler : MonoBehaviour
             return;
 
         _player.CharacterMover.GoToStartPoint();
-
+        _levelSpawner.SpawnNext();
         _clickMessage.gameObject.SetActive(false);
     }
 }

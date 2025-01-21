@@ -6,6 +6,7 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private LevelData[] _levels;
     [SerializeField] private ClothPanelHandler _clothPanelHandler;
     [SerializeField] private CharacterView _mainCharacter;
+    [SerializeField] private TextPanel _levelNameTextPanel;
 
     private int _activeLevelIndex = 0;
 
@@ -35,6 +36,9 @@ public class LevelSpawner : MonoBehaviour
         };
 
         _mainCharacter.SetRates(rates);
+
+        _levelNameTextPanel.Set(level.LevelName);
+        _levelNameTextPanel.Show();
 
         _activeLevelIndex++;
     }

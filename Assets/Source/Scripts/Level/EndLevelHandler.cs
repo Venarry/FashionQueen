@@ -12,6 +12,7 @@ public class EndLevelHandler : MonoBehaviour
     [SerializeField] private EndLevelActionButton _buttonPrefab;
     [SerializeField] private List<EndLevelActionSO> _actions;
     [SerializeField] private Button _nextLevelButton;
+    [SerializeField] private TextPanel _levelNamePanel;
 
     private readonly List<EndLevelActionButton> _spawnedButtons = new();
     private Character _enemy;
@@ -45,6 +46,7 @@ public class EndLevelHandler : MonoBehaviour
 
         _player.RateShower.HideRate();
         _enemy.RateShower.HideRate();
+        _levelNamePanel.Hide();
 
         if (TryWinPlayer(playerRate, enemyRate) == true)
         {
@@ -95,11 +97,8 @@ public class EndLevelHandler : MonoBehaviour
 
     private void EndLevel()
     {
-        _player.RateShower.HideRate();
-        _player.RateShower.HideRateSum();
-
-        _enemy.RateShower.HideRate();
-        _enemy.RateShower.HideRateSum();
+        _player.RateShower.HideAll();
+        _enemy.RateShower.HideAll();
 
         _nextLevelButton.gameObject.SetActive(true);
     }

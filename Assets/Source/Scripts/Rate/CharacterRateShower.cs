@@ -60,4 +60,10 @@ public class CharacterRateShower : MonoBehaviour
     {
         _rateSumText.gameObject.SetActive(false);
     }
+
+    public void HideAll()
+    {
+        HideRate();
+        HideRateSum();
+    }
 }

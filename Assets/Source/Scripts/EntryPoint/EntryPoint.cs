@@ -4,7 +4,6 @@ public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private ClothPanelHandler _clothPanelHandler;
     [SerializeField] private Character _player;
-    [SerializeField] private LevelSpawner _levelSpawner;
     [SerializeField] private StartPointHandler _startPointHandler;
     [SerializeField] private EndLevelHandler _endLevelHandler;
     [SerializeField] private EnemySpawner _enemySpawner;
@@ -24,7 +23,6 @@ public class EntryPoint : MonoBehaviour
         _startPointHandler.Enable();
         _endLevelHandler.Enable();
 
-        _levelSpawner.SpawnNext();
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle);
     }
 
