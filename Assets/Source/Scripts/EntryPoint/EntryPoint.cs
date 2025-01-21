@@ -24,7 +24,6 @@ public class EntryPoint : MonoBehaviour
 
         _levelSpawner.SpawnNext();
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle);
-        _player.CharacterMover.GoToStartPoint();
     }
 
     private void OnDestroy()

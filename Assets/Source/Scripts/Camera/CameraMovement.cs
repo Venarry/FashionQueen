@@ -54,6 +54,7 @@ public class CameraMovement : MonoBehaviour
     public void OnResetLevel()
     {
         _ended = false;
+        _moveCounter = 0;
 
         transform.position = _startPosition;
         transform.rotation = _startRotation;

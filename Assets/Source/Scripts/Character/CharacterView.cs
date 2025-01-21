@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class CharacterView : MonoBehaviour
 {
+    public class SkinnedMeshData
+    {
+        public Mesh Mesh;
+        public Material Material;
+    }
+
     [SerializeField] private SkinnedMeshRenderer _hair;
     [SerializeField] private SkinnedMeshRenderer _dress;
     [SerializeField] private SkinnedMeshRenderer _skirt;
@@ -13,6 +19,8 @@ public class CharacterView : MonoBehaviour
 
     private readonly Dictionary<int, int> _rate = new();
     private Dictionary<int, Action<int, Material, Mesh, int>> _setActions;
+    private Mesh[] _startMeshes;
+    private Material[] _startMaterials;
 
     public Dictionary<int, int> Rate => _rate.ToDictionary(c => c.Key, c => c.Value);
 
@@ -20,11 +28,20 @@ public class CharacterView : MonoBehaviour
     {
         _setActions = new()
         {
-            [ClothIndexDataSource.ClothIndexHair] = SetHair,
-            [ClothIndexDataSource.ClothIndexDress] = SetDress,
-            [ClothIndexDataSource.ClothIndexSkirt] = SetSkirt,
-            [ClothIndexDataSource.ClothIndexShoes] = SetShoes,
+            //[ClothIndexDataSource.ClothIndexHair] = SetHair,
+            //[ClothIndexDataSource.ClothIndexDress] = SetDress,
+            //[ClothIndexDataSource.ClothIndexSkirt] = SetSkirt,
+            //[ClothIndexDataSource.ClothIndexShoes] = SetShoes,
         };
+
+        _startMeshes = new Mesh[_meshes.Length];
+        _startMaterials = new Material[_meshes.Length];
+
+        for (int i = 0; i < _meshes.Length; i++)
+        {
+            _startMeshes[i] = _meshes[i].sharedMesh;
+            _startMaterials[i] = _meshes[i].sharedMaterial;
+        }
     }
 
     public void Set(int index, Material material, Mesh mesh, int rate)
@@ -43,7 +60,16 @@ public class CharacterView : MonoBehaviour
         }
     }
 
-    public void SetHair(int index, Material material, Mesh mesh, int rate)
+    public void SetStartCloth()
+    {
+        for (int i = 0; i < _meshes.Length; i++)
+        {
+            _meshes[i].sharedMesh = _startMeshes[i];
+            _meshes[i].sharedMaterial = _startMaterials[i];
+        }
+    }
+
+    /*public void SetHair(int index, Material material, Mesh mesh, int rate)
     {
         _hair.sharedMaterial = material;
         _hair.sharedMesh = mesh;
@@ -68,5 +94,5 @@ public class CharacterView : MonoBehaviour
         _shoes.sharedMaterial = material;
         _shoes.sharedMesh = mesh;
         _rate[index] = rate;
-    }
+    }*/
 }

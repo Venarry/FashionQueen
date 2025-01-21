@@ -10,6 +10,7 @@ public class CharacterMover : MonoBehaviour
 
     public Vector3 Position => transform.position;
     public float MoveSpeed => _moveSpeed;
+    public bool IsStarted { get; private set; } = false;
 
     public event Action ReachedNewStage;
     public event Action ReachedStartPoint;
@@ -25,6 +26,7 @@ public class CharacterMover : MonoBehaviour
     {
         try
         {
+            IsStarted = true;
             _characterAnimator.ChangeAnimation(AnimationsName.GirlWalk);
             await GoToPoint(_movePoints[0]);
 
@@ -51,6 +53,8 @@ public class CharacterMover : MonoBehaviour
                 }
 
                 _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
+                IsStarted = false;
+
                 ReachedFinish?.Invoke();
             }
             catch { }

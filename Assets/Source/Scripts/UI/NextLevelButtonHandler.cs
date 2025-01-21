@@ -28,17 +28,19 @@ public class NextLevelButtonHandler : MonoBehaviour
 
     private void OnButtonClick()
     {
+        _nextLevelButton.gameObject.SetActive(false);
         _levelSpawner.SpawnNext();
 
         _player.transform.position = _playerRespawnPoint.position;
-        _player.CharacterMover.GoToStartPoint();
 
         _cameraMovement.Remove(_enemy.transform);
         _cameraMovement.OnResetLevel();
 
+        _enemy.RateShower.HideRateSum();
+        _player.RateShower.HideRateSum();
         _player.RateShower.OnRestartLevel();
-        Destroy(_enemy.gameObject);
+        _player.CharacterView.SetStartCloth();
 
-        _nextLevelButton.gameObject.SetActive(false);
+        Destroy(_enemy.gameObject);
     }
 }

@@ -45,8 +45,8 @@ public class EndLevelHandler : MonoBehaviour
 
         await Task.Delay(500);
 
-        _player.RateShower.Hide();
-        _enemy.RateShower.Hide();
+        _player.RateShower.HideRate();
+        _enemy.RateShower.HideRate();
 
         if (TryWinPlayer(playerRate, enemyRate) == true)
         {

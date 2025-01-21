@@ -48,13 +48,16 @@ public class CharacterRateShower : MonoBehaviour
         _showCounter++;
     }
 
-    public void Hide()
+    public void HideRate()
     {
         foreach (CharacterRateView rate in _ratesView)
         {
             rate.Hide();
         }
+    }
 
+    public void HideRateSum()
+    {
         _rateSumText.gameObject.SetActive(false);
     }
 }
