@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f2c5f0cced7134683a42287eb599b2, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
-  LevelName: School
+  LevelName: Football
   StartHairRate: 1
   StartDressRate: 2
   StartSkirtRate: 3
