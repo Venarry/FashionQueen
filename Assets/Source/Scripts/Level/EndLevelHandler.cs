@@ -52,9 +52,12 @@ public class EndLevelHandler : MonoBehaviour
         }
         else
         {
-            EndLevelActionSO randomAction = _actions[UnityEngine.Random.Range(0, _actions.Count)];
+            _enemy.Animator.ChangeAnimation(AnimationsName.GirlWalk);
+            await _enemy.CharacterMover.GoToAttackPoint();
 
+            EndLevelActionSO randomAction = _actions[Random.Range(0, _actions.Count)];
             _enemy.Animator.ChangeAnimation(randomAction.AnimationName);
+            _player.Animator.ChangeAnimation(AnimationsName.GirlDieB);
 
             EndLevel();
         }
@@ -124,9 +127,12 @@ public class EndLevelHandler : MonoBehaviour
         _spawnedButtons.Clear();
     }
 
-    private void OnClick(EndLevelActionButton button)
+    private async void OnClick(EndLevelActionButton button)
     {
+        _player.Animator.ChangeAnimation(AnimationsName.GirlWalk);
+        await _player.CharacterMover.GoToAttackPoint();
         _player.Animator.ChangeAnimation(button.ActionAnimationName);
+        _enemy.Animator.ChangeAnimation(AnimationsName.GirlDieB);
 
         HideButtons();
         EndLevel();

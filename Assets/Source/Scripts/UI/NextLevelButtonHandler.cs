@@ -33,6 +33,7 @@ public class NextLevelButtonHandler : MonoBehaviour
         _levelSpawner.SpawnNext();
 
         _player.transform.position = _playerRespawnPoint.position;
+        _player.transform.rotation = Quaternion.identity;
 
         _cameraMovement.Remove(_enemy.transform);
         _cameraMovement.OnResetLevel();
@@ -42,7 +43,7 @@ public class NextLevelButtonHandler : MonoBehaviour
         _player.RateShower.OnRestartLevel();
         _player.CharacterView.SetStartCloth();
         _clickMessage.gameObject.SetActive(true);
-        _player.Animator.ChangeAnimation(AnimationsName.GirlIdle);
+        _player.Animator.ChangeAnimation(AnimationsName.GirlIdle, transitionDuration: 0);
 
         Destroy(_enemy.gameObject);
     }

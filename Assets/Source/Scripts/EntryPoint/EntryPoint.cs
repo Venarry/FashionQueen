@@ -10,13 +10,15 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private RateSmilesDataSource _rateSmilesDataSource;
     [SerializeField] private Transform[] _playerMovePoints;
+    [SerializeField] private Transform _playerAttackPoint;
     [SerializeField] private Transform[] _enemyMovePoints;
+    [SerializeField] private Transform _enemyAttackPoint;
     [SerializeField] private float _characterSpeed;
 
     private void Awake()
     {
-        _player.Init(_playerMovePoints, _characterSpeed, _rateSmilesDataSource);
-        _enemySpawner.Init(_rateSmilesDataSource, _enemyMovePoints);
+        _player.Init(_playerMovePoints, _playerAttackPoint, _characterSpeed, _rateSmilesDataSource);
+        _enemySpawner.Init(_rateSmilesDataSource, _enemyMovePoints, _enemyAttackPoint);
 
         _clothPanelHandler.Enable();
         _startPointHandler.Enable();

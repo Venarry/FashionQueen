@@ -7,10 +7,10 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public string LevelName;
-    [Range(0, 5)] public int StartHairRate;
-    [Range(0, 5)] public int StartDressRate;
-    [Range(0, 5)] public int StartSkirtRate;
-    [Range(0, 5)] public int StartShoesRate;
+    [Range(1, 5)] public int StartHairRate;
+    [Range(1, 5)] public int StartDressRate;
+    [Range(1, 5)] public int StartSkirtRate;
+    [Range(1, 5)] public int StartShoesRate;
     public List<ClothWithRateData> Hair;
     public List<ClothWithRateData> Dress;
     public List<ClothWithRateData> Skirt;

@@ -6,6 +6,7 @@ public class CharacterMover : MonoBehaviour
 {
     [SerializeField] private StringAnimator _characterAnimator;
     private Transform[] _movePoints;
+    private Transform _attackPoint;
     private float _moveSpeed = 3f;
 
     public Vector3 Position => transform.position;
@@ -16,9 +17,10 @@ public class CharacterMover : MonoBehaviour
     public event Action ReachedStartPoint;
     public event Action ReachedFinish;
 
-    public void Init(Transform[] points, float speed)
+    public void Init(Transform[] points, Transform attackPoint, float speed)
     {
         _movePoints = points;
+        _attackPoint = attackPoint;
         _moveSpeed = speed;
     }
 
@@ -61,13 +63,30 @@ public class CharacterMover : MonoBehaviour
         }
     }
 
-    private async Task GoToPoint(Transform point)
+    public async Task GoToAttackPoint()
+    {
+        await GoToPoint(_attackPoint, isLookAtPoint: true);
+    }
+
+    public void OnLevelReset()
+    {
+
+    }
+
+    private async Task GoToPoint(Transform point, bool isLookAtPoint = false)
     {
         float minMagnitude = 0.05f;
+        float rotationSpeed = 300f;
 
         while (Vector3.Distance(transform.position, point.position) > minMagnitude)
         {
             transform.position = Vector3.MoveTowards(transform.position, point.position, _moveSpeed * Time.deltaTime);
+
+            if(isLookAtPoint == true)
+            {
+                Quaternion lookAtPoint = Quaternion.LookRotation(point.position - transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPoint, rotationSpeed * Time.deltaTime);
+            }
 
             await Task.Yield();
         }

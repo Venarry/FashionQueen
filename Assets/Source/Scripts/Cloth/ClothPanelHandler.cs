@@ -74,6 +74,7 @@ public class ClothPanelHandler : MonoBehaviour
 
         StopCoroutine(_activeShowing);
         _activeShowing = null;
+        SetEnemyCloth();
     }
 
     private IEnumerator Showing()

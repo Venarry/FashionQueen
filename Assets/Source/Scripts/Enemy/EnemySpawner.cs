@@ -8,14 +8,16 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Character[] _prefabs;
 
     private Transform[] _movePoints;
+    private Transform _attackPoint;
     private Character _activeCharacter;
     private RateSmilesDataSource _rateSmilesDataSource;
     private readonly int _projectionDespawnDelay = 1000;
 
-    public void Init(RateSmilesDataSource rateSmilesDataSource, Transform[] points)
+    public void Init(RateSmilesDataSource rateSmilesDataSource, Transform[] points, Transform attackPoint)
     {
         _rateSmilesDataSource = rateSmilesDataSource;
         _movePoints = points;
+        _attackPoint = attackPoint;
     }
 
     public async Task<Character> SpawnWithProjection(Vector3 position, Quaternion rotation, float speed)
@@ -39,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
             await Task.Delay(_projectionDespawnDelay);
         }
 
-        _activeCharacter.Init(_movePoints, speed, _rateSmilesDataSource);
+        _activeCharacter.Init(_movePoints, _attackPoint, speed, _rateSmilesDataSource);
         return _activeCharacter;
     }
 

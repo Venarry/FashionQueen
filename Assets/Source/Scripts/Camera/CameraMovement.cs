@@ -14,6 +14,7 @@ public class CameraMovement : MonoBehaviour
     private Quaternion _startRotation;
     private int _moveCounter = 0;
     private bool _ended = false;
+    private Coroutine _activeMoving;
 
     private void Awake()
     {
@@ -47,12 +48,18 @@ public class CameraMovement : MonoBehaviour
             return;
 
         Transform target = _movePoints[_moveCounter];
-        StartCoroutine(MovingToEndPoint(target));
+        _activeMoving = StartCoroutine(MovingToEndPoint(target));
         _moveCounter++;
     }
 
     public void OnResetLevel()
     {
+        if(_activeMoving != null)
+        {
+            StopCoroutine(_activeMoving);
+            _activeMoving = null;
+        }
+
         _ended = false;
         _moveCounter = 0;
 
@@ -76,6 +83,8 @@ public class CameraMovement : MonoBehaviour
 
             yield return null;
         }
+
+        _activeMoving = null;
     }
 
     private Vector3 GetCenter()

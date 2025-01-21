@@ -38,6 +38,7 @@ public class StartPointHandler : MonoBehaviour
             _enemy = await _enemySpawner.SpawnWithProjection(enemySpawnPosition, Quaternion.identity, _playerMover.MoveSpeed);
 
             _targetFollower.Remove(cameraFollowGameobject.transform);
+            Destroy(cameraFollowGameobject);
             _clothPanelHandler.SetEnemy(_enemy);
             _endLevelHandler.SetEnemy(_enemy);
             _nextLevelButtonHandler.SetEnemy(_enemy);
