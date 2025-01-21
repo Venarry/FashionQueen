@@ -30,7 +30,6 @@ public class NextLevelButtonHandler : MonoBehaviour
     private void OnButtonClick()
     {
         _nextLevelButton.gameObject.SetActive(false);
-        _levelSpawner.SpawnNext();
 
         _player.transform.position = _playerRespawnPoint.position;
         _player.transform.rotation = Quaternion.identity;
