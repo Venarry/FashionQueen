@@ -95,6 +95,12 @@ public class EndLevelHandler : MonoBehaviour
 
     private void EndLevel()
     {
+        _player.RateShower.HideRate();
+        _player.RateShower.HideRateSum();
+
+        _enemy.RateShower.HideRate();
+        _enemy.RateShower.HideRateSum();
+
         _nextLevelButton.gameObject.SetActive(true);
     }
 
