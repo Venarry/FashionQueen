@@ -55,7 +55,6 @@ public class CharacterMover : MonoBehaviour
                 }
 
                 _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
-                IsStarted = false;
 
                 ReachedFinish?.Invoke();
             }
@@ -70,7 +69,7 @@ public class CharacterMover : MonoBehaviour
 
     public void OnLevelReset()
     {
-
+        IsStarted = false;
     }
 
     private async Task GoToPoint(Transform point, bool isLookAtPoint = false)

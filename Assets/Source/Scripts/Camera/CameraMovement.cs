@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Transform[] _movePoints;
     [SerializeField] private float _speed = 8;
     [SerializeField] private float _rotationSpeed = 1f;
+    [SerializeField] private Transform[] _swipePositions;
 
+    private int _swipeCounter = 0;
     private Vector3 _offset;
     private Vector3 _startPosition;
     private Quaternion _startRotation;
@@ -18,10 +21,10 @@ public class CameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        _offset = transform.position - GetCenter();
-
         _startPosition = transform.position;
         _startRotation = transform.rotation;
+
+        _offset = transform.position;
     }
 
     private void LateUpdate()
@@ -33,6 +36,45 @@ public class CameraMovement : MonoBehaviour
 
         Vector3 targetLookPosition = GetCenter();
         transform.position = Vector3.Lerp(transform.position, targetLookPosition + _offset, _speed * Time.deltaTime);
+    }
+
+    public void GoToNextSwipePosition()
+    {
+        if (_ended == true)
+            return;
+
+        _swipeCounter++;
+
+        if(_swipeCounter >= _swipePositions.Length)
+        {
+            _swipeCounter = 0;
+        }
+
+        GoToSwipePosition();
+    }
+
+    public void GoToPreviousSwipePosition()
+    {
+        if (_ended == true)
+            return;
+
+        _swipeCounter--;
+
+        if (_swipeCounter < 0)
+        {
+            _swipeCounter = _swipePositions.Length - 1;
+        }
+
+        GoToSwipePosition();
+    }
+
+    private void GoToSwipePosition()
+    {
+        Transform currentSwipePoint = _swipePositions[_swipeCounter];
+        StopMoving();
+
+        _offset = currentSwipePoint.position;
+        _activeMoving = StartCoroutine(MovingTo(currentSwipePoint.position + GetCenter(), currentSwipePoint.rotation, 0.2f));
     }
 
     public void Add(Transform target)
@@ -48,23 +90,21 @@ public class CameraMovement : MonoBehaviour
             return;
 
         Transform target = _movePoints[_moveCounter];
-        _activeMoving = StartCoroutine(MovingToEndPoint(target));
+        _activeMoving = StartCoroutine(MovingTo(target.position, target.rotation, 2f));
         _moveCounter++;
     }
 
     public void OnResetLevel()
     {
-        if(_activeMoving != null)
-        {
-            StopCoroutine(_activeMoving);
-            _activeMoving = null;
-        }
+        StopMoving();
 
         _ended = false;
         _moveCounter = 0;
 
         transform.position = _startPosition;
         transform.rotation = _startRotation;
+
+        _offset = transform.position;
     }
 
     public void Remove(Transform target)
@@ -72,14 +112,21 @@ public class CameraMovement : MonoBehaviour
         _targets.Remove(target);
     }
 
-    private IEnumerator MovingToEndPoint(Transform target)
+    private void StopMoving()
     {
-        float duration = 2f;
+        if (_activeMoving != null)
+        {
+            StopCoroutine(_activeMoving);
+            _activeMoving = null;
+        }
+    }
 
+    private IEnumerator MovingTo(Vector3 position, Quaternion rotation, float duration)
+    {
         for (float i = 0; i < duration; i += Time.deltaTime)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, i / duration);
-            transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, i / duration);
+            transform.position = Vector3.Lerp(transform.position, position, i / duration);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, i / duration);
 
             yield return null;
         }

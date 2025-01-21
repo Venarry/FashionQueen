@@ -42,6 +42,7 @@ public class NextLevelButtonHandler : MonoBehaviour
         _player.RateShower.HideRateSum();
         _player.RateShower.OnRestartLevel();
         _player.CharacterView.SetStartCloth();
+        _player.CharacterMover.OnLevelReset();
         _clickMessage.gameObject.SetActive(true);
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle, transitionDuration: 0);
 

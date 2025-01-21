@@ -101,14 +101,12 @@ public class EndLevelHandler : MonoBehaviour
             await Task.Delay(1000);
         }
 
-        character.RateShower.ShowRateSum(rate);
-
-        await ShowHandsWithRates(character);
+        await ShowHandsWithRates(character, rate);
 
         await Task.Delay(2000);
     }
 
-    private async Task ShowHandsWithRates(Character character)
+    private async Task ShowHandsWithRates(Character character, int rate)
     {
         Dictionary<int, int> rates = character.CharacterView.Rate;
         List<HandRate> hands = new();
@@ -123,6 +121,8 @@ public class EndLevelHandler : MonoBehaviour
             hands.Add(hand);
             await Task.Delay(600);
         }
+
+        character.RateShower.ShowRateSum(rate);
 
         await Task.Delay(1000);
 
