@@ -14,6 +14,9 @@ public class EndLevelHandler : MonoBehaviour
     [SerializeField] private Button _nextLevelButton;
     [SerializeField] private TextPanel _levelNamePanel;
 
+    [SerializeField] private HandRate _handPrefab;
+    [SerializeField] private Transform[] _handPoints;
+
     private readonly List<EndLevelActionButton> _spawnedButtons = new();
     private Character _enemy;
 
@@ -44,11 +47,19 @@ public class EndLevelHandler : MonoBehaviour
 
         await Task.Delay(500);
 
-        _player.RateShower.HideRate();
-        _enemy.RateShower.HideRate();
+        _player.RateShower.HideAll();
+        _enemy.RateShower.HideAll();
+
         _levelNamePanel.Hide();
 
-        if (TryWinPlayer(playerRate, enemyRate) == true)
+        bool playerIsWin = TryWinPlayer(playerRate, enemyRate);
+
+        HandleAttackAction(playerIsWin);
+    }
+
+    private async void HandleAttackAction(bool playerIsWin)
+    {
+        if (playerIsWin == true)
         {
             ShowActionButtons();
         }
@@ -92,14 +103,39 @@ public class EndLevelHandler : MonoBehaviour
 
         character.RateShower.ShowRateSum(rate);
 
+        await ShowHandsWithRates(character);
+
         await Task.Delay(2000);
+    }
+
+    private async Task ShowHandsWithRates(Character character)
+    {
+        Dictionary<int, int> rates = character.CharacterView.Rate;
+        List<HandRate> hands = new();
+
+        for (int i = 0; i < _handPoints.Length; i++)
+        {
+            Transform point = _handPoints[i];
+            HandRate hand = Instantiate(_handPrefab, point);
+            hand.Set(rates[i].ToString());
+            hand.Show();
+
+            hands.Add(hand);
+            await Task.Delay(600);
+        }
+
+        await Task.Delay(1000);
+
+        foreach (HandRate hand in hands)
+        {
+            Destroy(hand.gameObject);
+        }
+
+        hands.Clear();
     }
 
     private void EndLevel()
     {
-        _player.RateShower.HideAll();
-        _enemy.RateShower.HideAll();
-
         _nextLevelButton.gameObject.SetActive(true);
     }
 
