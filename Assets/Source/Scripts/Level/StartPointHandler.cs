@@ -31,7 +31,13 @@ public class StartPointHandler : MonoBehaviour
             await Task.Delay(_actionsDelay);
 
             Vector3 enemySpawnPosition = new(_playerMover.Position.x * -1, _playerMover.Position.y, _playerMover.Position.z);
+            GameObject cameraFollowGameobject = new("EnemyPosition");
+            cameraFollowGameobject.transform.position = enemySpawnPosition;
+            _targetFollower.Add(cameraFollowGameobject.transform);
+
             _enemy = await _enemySpawner.SpawnWithProjection(enemySpawnPosition, Quaternion.identity, _playerMover.MoveSpeed);
+
+            _targetFollower.Remove(cameraFollowGameobject.transform);
             _clothPanelHandler.SetEnemy(_enemy);
             _endLevelHandler.SetEnemy(_enemy);
             _nextLevelButtonHandler.SetEnemy(_enemy);

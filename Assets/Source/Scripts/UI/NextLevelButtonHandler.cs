@@ -8,6 +8,7 @@ public class NextLevelButtonHandler : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private Transform _playerRespawnPoint;
+    [SerializeField] private GameObject _clickMessage;
 
     private Character _enemy;
 
@@ -40,6 +41,8 @@ public class NextLevelButtonHandler : MonoBehaviour
         _player.RateShower.HideRateSum();
         _player.RateShower.OnRestartLevel();
         _player.CharacterView.SetStartCloth();
+        _clickMessage.gameObject.SetActive(true);
+        _player.Animator.ChangeAnimation(AnimationsName.GirlIdle);
 
         Destroy(_enemy.gameObject);
     }

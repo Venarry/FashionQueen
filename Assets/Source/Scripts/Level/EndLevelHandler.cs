@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +8,7 @@ public class EndLevelHandler : MonoBehaviour
 {
     [SerializeField] private Character _player;
     [SerializeField] private CameraMovement _camera;
-    [SerializeField] private Transform _buttonsParent;
+    [SerializeField] private ClothChoosePanel _choosePanel;
     [SerializeField] private EndLevelActionButton _buttonPrefab;
     [SerializeField] private List<EndLevelActionSO> _actions;
     [SerializeField] private Button _nextLevelButton;
@@ -92,20 +90,6 @@ public class EndLevelHandler : MonoBehaviour
         await Task.Delay(2000);
     }
 
-    /*private async Task ShowEnemyClothRate(Character character, int rate)
-    {
-        _camera.GoNext();
-        await Task.Delay(500);
-
-        for (int i = 0; i < _enemy.RateShower.RateCount; i++)
-        {
-            _enemy.RateShower.ShowNext();
-            await Task.Delay(1000);
-        }
-
-        await Task.Delay(2000);
-    }*/
-
     private void EndLevel()
     {
         _nextLevelButton.gameObject.SetActive(true);
@@ -113,11 +97,11 @@ public class EndLevelHandler : MonoBehaviour
 
     private void ShowActionButtons()
     {
-        _buttonsParent.gameObject.SetActive(true);
+        _choosePanel.ShowPanel();
 
         foreach (EndLevelActionSO action in _actions)
         {
-            EndLevelActionButton button = Instantiate(_buttonPrefab, _buttonsParent);
+            EndLevelActionButton button = Instantiate(_buttonPrefab, _choosePanel.ButtonsParent);
             button.Init(action.AnimationName, action.Icon);
             button.Clicked += OnClick;
 
@@ -127,7 +111,7 @@ public class EndLevelHandler : MonoBehaviour
 
     private void HideButtons()
     {
-        _buttonsParent.gameObject.SetActive(false);
+        _choosePanel.HideAll();
 
         if (_spawnedButtons.Count == 0)
             return;

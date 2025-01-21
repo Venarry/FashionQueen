@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Action1
   m_EditorClassIdentifier: 
   AnimationName: Attack1
-  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}
+  Icon: {fileID: 21300000, guid: 7b07096106616e94ba55d46af75ba779, type: 3}

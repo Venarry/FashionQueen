@@ -11,10 +11,9 @@ public class ClothPanelHandler : MonoBehaviour
     private const int ClothIndexSkirt = 2;
     private const int ClothIndexShoes = 3;
 
-    [SerializeField] private Transform _buttonsParent;
+    [SerializeField] private ClothChoosePanel _choosePanel;
     [SerializeField] private ClothChooseButton _buttonPrefab;
     [SerializeField] private Character _player;
-    [SerializeField] private Image _timerImage;
 
     private readonly List<ClothChooseButton> _spawnedButtons = new();
     private Character _enemy;
@@ -83,7 +82,7 @@ public class ClothPanelHandler : MonoBehaviour
 
         for (float i = 0; i < _showTime; i += Time.unscaledDeltaTime)
         {
-            _timerImage.fillAmount = i / _showTime;
+            _choosePanel.FillBar(i / _showTime);
 
             yield return null;
         }
@@ -97,8 +96,9 @@ public class ClothPanelHandler : MonoBehaviour
     {
         StopShowing();
         RemoveButtons();
-        _timerImage.gameObject.SetActive(false);
-        _buttonsParent.gameObject.SetActive(false);
+        _choosePanel.HideAll();
+        //_timerImage.gameObject.SetActive(false);
+        //_buttonsParent.gameObject.SetActive(false);
 
         GameTimeScaler.Remove(nameof(ClothPanelHandler));
     }
@@ -106,12 +106,13 @@ public class ClothPanelHandler : MonoBehaviour
     private void ShowClothButtons()
     {
         _currentStageCloth = _clothes[_stageCounter];
-        _buttonsParent.gameObject.SetActive(true);
-        _timerImage.gameObject.SetActive(true);
+        _choosePanel.ShowAll();
+        //_buttonsParent.gameObject.SetActive(true);
+        //_timerImage.gameObject.SetActive(true);
 
         foreach (ClothWithRateData cloth in _currentStageCloth)
         {
-            ClothChooseButton button = Instantiate(_buttonPrefab, _buttonsParent);
+            ClothChooseButton button = Instantiate(_buttonPrefab, _choosePanel.ButtonsParent);
             button.Init(cloth.Data.Material, cloth.Data.Mesh, cloth.Rate, _stageCounter, cloth.Data.Icon);
             button.Clicked += OnClothButtonClick;
 

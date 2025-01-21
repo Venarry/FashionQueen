@@ -4,6 +4,7 @@ public class StartLevelHandler : MonoBehaviour
 {
     [SerializeField] private ClickPanel _clickPanel;
     [SerializeField] private Character _player;
+    [SerializeField] private GameObject _clickMessage;
 
     private void OnEnable()
     {
@@ -21,5 +22,7 @@ public class StartLevelHandler : MonoBehaviour
             return;
 
         _player.CharacterMover.GoToStartPoint();
+
+        _clickMessage.gameObject.SetActive(false);
     }
 }
