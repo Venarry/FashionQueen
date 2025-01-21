@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
+  m_Name: HairNaoko
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 8ccbbc508e6693d4b899a7f0bbf8bd85, type: 2}
+  Mesh: {fileID: 4300022, guid: 0e1eed12d7f7bc240a069203d35c619b, type: 3}
+  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}

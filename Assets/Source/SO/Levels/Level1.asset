@@ -22,6 +22,10 @@ MonoBehaviour:
     Data: {fileID: 11400000, guid: d37b8a1f752c6834e85a883bf72814ba, type: 2}
   - Rate: 2
     Data: {fileID: 11400000, guid: aa11fef7ac79a7d438f5a2c937271179, type: 2}
+  - Rate: 2
+    Data: {fileID: 11400000, guid: 6dc5b315b3738d242a44eb45091896a2, type: 2}
+  - Rate: 2
+    Data: {fileID: 11400000, guid: 4f9be0db7c4379e4788523e3e9c5fbcb, type: 2}
   Dress:
   - Rate: 2
     Data: {fileID: 11400000, guid: 2d970a847af4f1b44abce174a8cc4057, type: 2}
