@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class StartPointHandler : MonoBehaviour
     [SerializeField] private ClothPanelHandler _clothPanelHandler;
     [SerializeField] private CameraMovement _targetFollower;
     [SerializeField] private EndLevelHandler _endLevelHandler;
+    [SerializeField] private NextLevelButtonHandler _nextLevelButtonHandler;
 
     private readonly int _actionsDelay = 500;
     private Character _enemy;
@@ -32,6 +34,7 @@ public class StartPointHandler : MonoBehaviour
             _enemy = await _enemySpawner.SpawnWithProjection(enemySpawnPosition, Quaternion.identity, _playerMover.MoveSpeed);
             _clothPanelHandler.SetEnemy(_enemy);
             _endLevelHandler.SetEnemy(_enemy);
+            _nextLevelButtonHandler.SetEnemy(_enemy);
             _targetFollower.Add(_enemy.transform);
 
             await Task.Delay(_actionsDelay);
@@ -39,6 +42,9 @@ public class StartPointHandler : MonoBehaviour
             _playerMover.Go();
             _enemy.CharacterMover.Go();
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
     }
 }

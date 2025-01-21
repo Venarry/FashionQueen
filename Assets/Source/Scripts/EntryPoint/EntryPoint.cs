@@ -22,7 +22,7 @@ public class EntryPoint : MonoBehaviour
         _startPointHandler.Enable();
         _endLevelHandler.Enable();
 
-        _levelSpawner.Spawn();
+        _levelSpawner.SpawnNext();
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle);
         _player.CharacterMover.GoToStartPoint();
     }

@@ -9,14 +9,14 @@ public class LevelSpawner : MonoBehaviour
 
     private int _activeLevelIndex = 0;
 
-    public void Spawn()
+    public void SpawnNext()
     {
-        LevelData level = _levels[_activeLevelIndex];
-
-        foreach (ClothWithRateData item in level.Dress)
+        if (_activeLevelIndex >= _levels.Length)
         {
-            Debug.Log(item.Rate);
+            _activeLevelIndex = 0;
         }
+
+        LevelData level = _levels[_activeLevelIndex];
 
         _clothPanelHandler.SetData(new ClothWithRateData[][] 
         { 
@@ -35,5 +35,12 @@ public class LevelSpawner : MonoBehaviour
         };
 
         _mainCharacter.SetRates(rates);
+
+        _activeLevelIndex++;
+    }
+
+    public void ResetLevels()
+    {
+        _activeLevelIndex = 0;
     }
 }

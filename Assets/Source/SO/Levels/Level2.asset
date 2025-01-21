@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f2c5f0cced7134683a42287eb599b2, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: 
+  LevelName: School
+  StartHairRate: 1
+  StartDressRate: 2
+  StartSkirtRate: 3
+  StartShoesRate: 5
+  Hair:
+  - Rate: 2
+    Data: {fileID: 11400000, guid: 0532912e374db874491b9d88bcac3475, type: 2}
+  - Rate: 4
+    Data: {fileID: 11400000, guid: d38db5d1624f7a54bbdc36d8b15efa6c, type: 2}
+  Dress:
+  - Rate: 2
+    Data: {fileID: 11400000, guid: 729ee013897f1324a8b592aa4c94653a, type: 2}
+  - Rate: 4
+    Data: {fileID: 11400000, guid: 9e8101ffd67f8704e801931ba2d2e029, type: 2}
+  Skirt:
+  - Rate: 2
+    Data: {fileID: 11400000, guid: 7f0d9140eb4301443a4312a2b24009f7, type: 2}
+  - Rate: 4
+    Data: {fileID: 11400000, guid: 6c9fd58d558dafc4f967b668cf4a8adb, type: 2}
+  - Rate: 4
+    Data: {fileID: 11400000, guid: 97c41a37b45f6ed4ab8f3fe66f939128, type: 2}
+  Shoes:
+  - Rate: 2
+    Data: {fileID: 11400000, guid: e7b9535e889ba2245ad30cec1cfc3460, type: 2}
+  - Rate: 4
+    Data: {fileID: 11400000, guid: dad99438f753d62438f6829d71a65b74, type: 2}

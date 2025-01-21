@@ -53,7 +53,15 @@ public class CameraMovement : MonoBehaviour
 
     public void OnResetLevel()
     {
+        _ended = false;
 
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
+    }
+
+    public void Remove(Transform target)
+    {
+        _targets.Remove(target);
     }
 
     private IEnumerator MovingToEndPoint(Transform target)
@@ -75,6 +83,11 @@ public class CameraMovement : MonoBehaviour
 
         foreach (Transform target in _targets)
         {
+            if(target == null)
+            {
+                continue;
+            }
+
             targetLookPosition += target.position;
         }
 

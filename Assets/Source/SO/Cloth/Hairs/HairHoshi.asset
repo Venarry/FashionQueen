@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
-  m_Name: AkiHair
+  m_Name: HairHoshi
   m_EditorClassIdentifier: 
-  Rate: 1
-  Material: {fileID: 2100000, guid: d045ba05f20a386469ce3e1848cca8de, type: 2}
-  Mesh: {fileID: 4300010, guid: 0881002e47f92f240a6e8684d49eeee7, type: 3}
+  Material: {fileID: 2100000, guid: e818031af66370e4885a47d23b6cb3f4, type: 2}
+  Mesh: {fileID: 4300018, guid: c88572b54567c9a479ab74998c7c0848, type: 3}
   Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}

@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
-  m_Name: AiHair
+  m_Name: SkirtZombie
   m_EditorClassIdentifier: 
-  Rate: 1
-  Material: {fileID: 2100000, guid: 1199fe41a4a4ea74383cbd9545f86a58, type: 2}
-  Mesh: {fileID: 4300018, guid: e5326b54f49cc50479cbf8508dc0e805, type: 3}
+  Material: {fileID: 2100000, guid: ea5f5c5be164afe44aed5ca0c970ae42, type: 2}
+  Mesh: {fileID: 4300006, guid: e19e125d317f96a4483aa0fc5544e262, type: 3}
   Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}

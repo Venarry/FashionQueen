@@ -238,6 +238,22 @@ PrefabInstance:
       propertyPath: _skirt
       value: 
       objectReference: {fileID: 5652697567856958224}
+    - target: {fileID: 5791583638292396334, guid: 78724995b9be4ee44becf0fe4cdf5ec4, type: 3}
+      propertyPath: _meshes.Array.data[0]
+      value: 
+      objectReference: {fileID: 5652697567856958230}
+    - target: {fileID: 5791583638292396334, guid: 78724995b9be4ee44becf0fe4cdf5ec4, type: 3}
+      propertyPath: _meshes.Array.data[1]
+      value: 
+      objectReference: {fileID: 5652697567856958218}
+    - target: {fileID: 5791583638292396334, guid: 78724995b9be4ee44becf0fe4cdf5ec4, type: 3}
+      propertyPath: _meshes.Array.data[2]
+      value: 
+      objectReference: {fileID: 5652697567856958224}
+    - target: {fileID: 5791583638292396334, guid: 78724995b9be4ee44becf0fe4cdf5ec4, type: 3}
+      propertyPath: _meshes.Array.data[3]
+      value: 
+      objectReference: {fileID: 5652697567856958228}
     - target: {fileID: 7446031039185132396, guid: 78724995b9be4ee44becf0fe4cdf5ec4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

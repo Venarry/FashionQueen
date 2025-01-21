@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterRateShower : MonoBehaviour
 {
     [SerializeField] private CharacterRateView[] _ratesView;
+    [SerializeField] private TMP_Text _rateSumText;
 
     private CharacterView _characterView;
     private RateSmilesDataSource _rateSmilesDataSource;
@@ -21,6 +23,17 @@ public class CharacterRateShower : MonoBehaviour
         _rateSmilesDataSource = rateSmilesDataSource;
     }
 
+    public void OnRestartLevel()
+    {
+        _showCounter = 0;
+    }
+
+    public void ShowRateSum(int value)
+    {
+        _rateSumText.gameObject.SetActive(true);
+        _rateSumText.text = value.ToString();
+    }
+
     public void ShowNext()
     {
         Dictionary<int, int> rates = _characterView.Rate;
@@ -30,9 +43,18 @@ public class CharacterRateShower : MonoBehaviour
         currentRate.Show();
 
         int rate = rates[_showCounter];
-        Debug.Log(rate);
         currentRate.Set(smiles[rate - 1], rate);
 
         _showCounter++;
+    }
+
+    public void Hide()
+    {
+        foreach (CharacterRateView rate in _ratesView)
+        {
+            rate.Hide();
+        }
+
+        _rateSumText.gameObject.SetActive(false);
     }
 }

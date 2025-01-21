@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
+  m_Name: ShoesFumiko
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 77389aa52d8c3234eb43a342e7e75b46, type: 2}
+  Mesh: {fileID: 4300000, guid: 21b7da717e13b954cbafadff623a7239, type: 3}
+  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}

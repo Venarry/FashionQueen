@@ -9,6 +9,7 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _dress;
     [SerializeField] private SkinnedMeshRenderer _skirt;
     [SerializeField] private SkinnedMeshRenderer _shoes;
+    [SerializeField] private SkinnedMeshRenderer[] _meshes;
 
     private readonly Dictionary<int, int> _rate = new();
     private Dictionary<int, Action<int, Material, Mesh, int>> _setActions;
@@ -28,7 +29,10 @@ public class CharacterView : MonoBehaviour
 
     public void Set(int index, Material material, Mesh mesh, int rate)
     {
-        _setActions[index](index, material, mesh, rate);
+        //_setActions[index](index, material, mesh, rate);
+        _meshes[index].sharedMaterial = material;
+        _meshes[index].sharedMesh = mesh;
+        _rate[index] = rate;
     }
 
     public void SetRates(Dictionary<int, int> rates)

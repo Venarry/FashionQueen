@@ -12,6 +12,11 @@ public class CharacterRateView : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void Set(Sprite sprite, int rate)
     {
         _smile.sprite = sprite;

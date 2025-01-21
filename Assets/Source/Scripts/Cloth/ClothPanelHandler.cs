@@ -55,6 +55,7 @@ public class ClothPanelHandler : MonoBehaviour
     {
         if(_stageCounter >= _clothes.Length)
         {
+            Debug.Log("null");
             return;
         }
 
