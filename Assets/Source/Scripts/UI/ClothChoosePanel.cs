@@ -8,7 +8,7 @@ public class ClothChoosePanel : MonoBehaviour
 
     private void Awake()
     {
-        HideAll();
+        //HideAll();
     }
 
     public void FillBar(float value)
