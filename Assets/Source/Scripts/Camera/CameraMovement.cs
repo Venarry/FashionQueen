@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _speed = 8;
     [SerializeField] private float _rotationSpeed = 1f;
     [SerializeField] private Transform[] _swipePositions;
+    [SerializeField] private Transform _startGamePoint;
 
     private int _swipeCounter = 0;
     private Vector3 _offset;
@@ -21,10 +21,10 @@ public class CameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        _startPosition = transform.position;
-        _startRotation = transform.rotation;
+        _startPosition = _swipePositions[0].position;
+        _startRotation = _swipePositions[0].rotation;
 
-        _offset = transform.position;
+        _offset = _startGamePoint.position;
     }
 
     private void LateUpdate()
@@ -36,6 +36,11 @@ public class CameraMovement : MonoBehaviour
 
         Vector3 targetLookPosition = GetCenter();
         transform.position = Vector3.Lerp(transform.position, targetLookPosition + _offset, _speed * Time.deltaTime);
+    }
+
+    public void StartMovement()
+    {
+        _offset = _startPosition;
     }
 
     public void GoToNextSwipePosition()
@@ -101,10 +106,10 @@ public class CameraMovement : MonoBehaviour
         _ended = false;
         _moveCounter = 0;
 
-        transform.position = _startPosition;
+        transform.position = _startGamePoint.position;
         transform.rotation = _startRotation;
 
-        _offset = transform.position;
+        _offset = _startGamePoint.position;
     }
 
     public void Remove(Transform target)

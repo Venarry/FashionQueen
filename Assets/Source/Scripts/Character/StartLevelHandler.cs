@@ -6,6 +6,7 @@ public class StartLevelHandler : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private GameObject _clickMessage;
     [SerializeField] private LevelSpawner _levelSpawner;
+    [SerializeField] private CameraMovement _cameraMovement;
 
     private void OnEnable()
     {
@@ -24,6 +25,7 @@ public class StartLevelHandler : MonoBehaviour
 
         _player.CharacterMover.GoToStartPoint();
         _levelSpawner.SpawnNext();
+        _cameraMovement.StartMovement();
         _clickMessage.gameObject.SetActive(false);
     }
 }
