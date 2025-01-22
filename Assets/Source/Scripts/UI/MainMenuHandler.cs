@@ -7,6 +7,7 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private Button _backButton;
     [SerializeField] private StartLevelHandler _startGamePanel;
     [SerializeField] private Shop _shop;
+    [SerializeField] private CameraMovement _cameraMovement;
 
     private void OnEnable()
     {
@@ -25,6 +26,7 @@ public class MainMenuHandler : MonoBehaviour
         _startGamePanel.Disable();
         _shop.Show();
         _shopButton.gameObject.SetActive(false);
+        _cameraMovement.GoToShop();
     }
 
     private void OnBackClicked()
@@ -32,5 +34,6 @@ public class MainMenuHandler : MonoBehaviour
         _startGamePanel.Enable();
         _shop.Hide();
         _shopButton.gameObject.SetActive(true);
+        _cameraMovement.GoToStartPosition();
     }
 }

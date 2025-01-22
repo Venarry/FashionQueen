@@ -9,6 +9,7 @@ public class CharacterShopButton : MonoBehaviour
     [field: SerializeField] public bool Locked { get; private set; }
 
     [SerializeField] private Button _button;
+    [SerializeField] private Button _applyButton;
     [SerializeField] private Image _lockImage;
     [SerializeField] private TMP_Text _priceLabel;
 
@@ -25,10 +26,12 @@ public class CharacterShopButton : MonoBehaviour
 
 
     public event Action<CharacterShopButton> Clicked;
+    public event Action<CharacterShopButton> ApplyClicked;
 
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClick);
+        _applyButton.onClick.AddListener(OnApplyClick);
 
         if(Locked == true)
         {
@@ -39,6 +42,7 @@ public class CharacterShopButton : MonoBehaviour
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnButtonClick);
+        _applyButton.onClick.RemoveListener(OnApplyClick);
     }
 
     public void SetIndex(int index)
@@ -59,8 +63,23 @@ public class CharacterShopButton : MonoBehaviour
         Locked = false;
     }
 
+    public void ShowApply()
+    {
+        _applyButton.gameObject.SetActive(true);
+    }
+
+    public void HideApply()
+    {
+        _applyButton.gameObject.SetActive(false);
+    }
+
     private void OnButtonClick()
     {
         Clicked?.Invoke(this);
+    }
+    
+    private void OnApplyClick()
+    {
+        ApplyClicked?.Invoke(this);
     }
 }

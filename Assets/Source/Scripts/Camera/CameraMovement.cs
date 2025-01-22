@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 1f;
     [SerializeField] private Transform[] _swipePositions;
     [SerializeField] private Transform _startGamePoint;
+    [SerializeField] private Transform _shopPoint;
 
     private int _swipeCounter = 0;
     private Vector3 _offset;
@@ -18,13 +19,14 @@ public class CameraMovement : MonoBehaviour
     private int _moveCounter = 0;
     private bool _ended = false;
     private Coroutine _activeMoving;
+    private bool _swipeLocked = true;
 
     private void Awake()
     {
         _startPosition = _swipePositions[0].position;
         _startRotation = _swipePositions[0].rotation;
 
-        _offset = _startGamePoint.position;
+        GoToStartPosition();
     }
 
     private void LateUpdate()
@@ -38,13 +40,28 @@ public class CameraMovement : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetLookPosition + _offset, _speed * Time.deltaTime);
     }
 
+    public void GoToShop()
+    {
+        _swipeLocked = true;
+        _offset = _shopPoint.position;
+    }
+
+    public void GoToStartPosition()
+    {
+        _offset = _startGamePoint.position;
+    }
+
     public void StartMovement()
     {
+        _swipeLocked = false;
         _offset = _startPosition;
     }
 
     public void GoToNextSwipePosition()
     {
+        if (_swipeLocked == true)
+            return;
+
         if (_ended == true)
             return;
 
@@ -60,6 +77,9 @@ public class CameraMovement : MonoBehaviour
 
     public void GoToPreviousSwipePosition()
     {
+        if (_swipeLocked == true)
+            return;
+
         if (_ended == true)
             return;
 
@@ -104,12 +124,13 @@ public class CameraMovement : MonoBehaviour
         StopMoving();
 
         _ended = false;
+        _swipeLocked = true;
         _moveCounter = 0;
 
         transform.position = _startGamePoint.position;
         transform.rotation = _startRotation;
 
-        _offset = _startGamePoint.position;
+        GoToStartPosition();
     }
 
     public void Remove(Transform target)

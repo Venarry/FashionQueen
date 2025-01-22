@@ -9,6 +9,8 @@ public class Shop : MonoBehaviour
 
     private WalletModel _walletModel;
     private SaveHandler _saveHandler;
+    private CharacterShopButton _activeSetButton;
+    private CharacterShopButton _activePreviewButton;
 
     public int ActiveCloth { get; private set; } = 0;
 
@@ -16,6 +18,8 @@ public class Shop : MonoBehaviour
     {
         _walletModel = walletModel;
         _saveHandler = saveHandler;
+
+        _activeSetButton = _characterButtons[ActiveCloth];
     }
 
     private void OnEnable()
@@ -62,6 +66,11 @@ public class Shop : MonoBehaviour
 
     public void Hide()
     {
+        if (_activeSetButton != null)
+        {
+            SetCloth(_activeSetButton);
+        }
+
         _parent.SetActive(false);
     }
 
@@ -81,11 +90,13 @@ public class Shop : MonoBehaviour
     {
         if (button.Locked == true)
         {
-            if (_walletModel.TryRemove(button.Price))
+            if (_activePreviewButton == button)
             {
-                button.Unlock();
-                SetCloth(button);
+                return;
             }
+
+            DisablePreview();
+            SetPreview(button);
         }
         else
         {
@@ -98,7 +109,45 @@ public class Shop : MonoBehaviour
         _character.CharacterView.Set(1, button.DressMaterial, button.Dress, 1);
         _character.CharacterView.Set(2, button.SkirtMaterial, button.Skirt, 1);
         ActiveCloth = button.ClothIndex;
+        _activeSetButton = button;
+
+        DisablePreview();
+        _activePreviewButton = button;
 
         _saveHandler.Save();
+    }
+
+    private void DisablePreview()
+    {
+        if (_activePreviewButton != null)
+        {
+            _activePreviewButton.ApplyClicked -= OnApplyClick;
+            _activePreviewButton.HideApply();
+            _activePreviewButton = null;
+        }
+    }
+
+    private void SetPreview(CharacterShopButton button)
+    {
+        _character.CharacterView.Set(1, button.DressMaterial, button.Dress, 1);
+        _character.CharacterView.Set(2, button.SkirtMaterial, button.Skirt, 1);
+        button.ShowApply();
+        button.ApplyClicked += OnApplyClick;
+
+        _activePreviewButton = button;
+    }
+
+    private void OnApplyClick(CharacterShopButton button)
+    {
+        button.ApplyClicked -= OnApplyClick;
+
+        if (_walletModel.TryRemove(button.Price))
+        {
+            button.Unlock();
+            button.HideApply();
+            _activePreviewButton = null;
+
+            SetCloth(button);
+        }
     }
 }
