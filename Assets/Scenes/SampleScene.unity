@@ -14343,7 +14343,7 @@ MonoBehaviour:
   _cameraMovement: {fileID: 963194229}
   _playerRespawnPoint: {fileID: 1686745753}
   _clickMessage: {fileID: 1322949982}
-  _shopButton: {fileID: 0}
+  _shopButton: {fileID: 409935449}
 --- !u!1001 &760724417192774952
 PrefabInstance:
   m_ObjectHideFlags: 0
