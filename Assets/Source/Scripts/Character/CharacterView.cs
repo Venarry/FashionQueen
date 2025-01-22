@@ -18,7 +18,6 @@ public class CharacterView : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer[] _meshes;
 
     private readonly Dictionary<int, int> _rate = new();
-    private Dictionary<int, Action<int, Material, Mesh, int>> _setActions;
     private Mesh[] _startMeshes;
     private Material[] _startMaterials;
 
@@ -26,14 +25,6 @@ public class CharacterView : MonoBehaviour
 
     private void Awake()
     {
-        _setActions = new()
-        {
-            //[ClothIndexDataSource.ClothIndexHair] = SetHair,
-            //[ClothIndexDataSource.ClothIndexDress] = SetDress,
-            //[ClothIndexDataSource.ClothIndexSkirt] = SetSkirt,
-            //[ClothIndexDataSource.ClothIndexShoes] = SetShoes,
-        };
-
         _startMeshes = new Mesh[_meshes.Length];
         _startMaterials = new Material[_meshes.Length];
 
@@ -46,7 +37,6 @@ public class CharacterView : MonoBehaviour
 
     public void Set(int index, Material material, Mesh mesh, int rate)
     {
-        //_setActions[index](index, material, mesh, rate);
         _meshes[index].sharedMaterial = material;
         _meshes[index].sharedMesh = mesh;
         _rate[index] = rate;

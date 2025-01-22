@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ClothPanelHandler : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class ClothPanelHandler : MonoBehaviour
     [SerializeField] private Character _player;
 
     private readonly List<ClothChooseButton> _spawnedButtons = new();
+    private ClothChooseButton _activeButton;
     private Character _enemy;
     private ClothWithRateData[][] _clothes;
     private ClothWithRateData[] _currentStageCloth;
@@ -98,8 +98,7 @@ public class ClothPanelHandler : MonoBehaviour
         StopShowing();
         RemoveButtons();
         _choosePanel.HideAll();
-        //_timerImage.gameObject.SetActive(false);
-        //_buttonsParent.gameObject.SetActive(false);
+        UnsubscribeActiveButton();
 
         GameTimeScaler.Remove(nameof(ClothPanelHandler));
     }
@@ -108,8 +107,6 @@ public class ClothPanelHandler : MonoBehaviour
     {
         _currentStageCloth = _clothes[_stageCounter];
         _choosePanel.ShowAll();
-        //_buttonsParent.gameObject.SetActive(true);
-        //_timerImage.gameObject.SetActive(true);
 
         foreach (ClothWithRateData cloth in _currentStageCloth)
         {
@@ -142,8 +139,29 @@ public class ClothPanelHandler : MonoBehaviour
 
     private void OnClothButtonClick(ClothChooseButton button)
     {
-        _player.CharacterView.Set(button.ClothIndex, button.Material, button.Mesh, button.Rate);
+        UnsubscribeActiveButton();
 
+        _activeButton = button;
+        _activeButton.ShowApplyButton();
+        _activeButton.ApplyClicked += OnActiveButtonClick;
+        _player.CharacterView.Set(button.ClothIndex, button.Material, button.Mesh, button.Rate);
+    }
+
+    private void UnsubscribeActiveButton()
+    {
+        if (_activeButton != null)
+        {
+            _activeButton.HideApplyButton();
+            _activeButton.ApplyClicked -= OnActiveButtonClick;
+            _activeButton = null;
+        }
+    }
+
+    private void OnActiveButtonClick(ClothChooseButton button)
+    {
+        UnsubscribeActiveButton();
+
+        _player.CharacterView.Set(button.ClothIndex, button.Material, button.Mesh, button.Rate);
         SetEnemyCloth();
         Hide();
     }

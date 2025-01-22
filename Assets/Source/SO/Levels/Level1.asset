@@ -29,6 +29,8 @@ MonoBehaviour:
   Dress:
   - Rate: 2
     Data: {fileID: 11400000, guid: 2d970a847af4f1b44abce174a8cc4057, type: 2}
+  - Rate: 5
+    Data: {fileID: 11400000, guid: 729ee013897f1324a8b592aa4c94653a, type: 2}
   - Rate: 4
     Data: {fileID: 11400000, guid: 80873886e00981747b78df7dc16e437d, type: 2}
   Skirt:

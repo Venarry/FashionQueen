@@ -6,11 +6,6 @@ public class ClothChoosePanel : MonoBehaviour
     [field: SerializeField] public Transform ButtonsParent { get; private set; }
     [SerializeField] private Image _timerBar;
 
-    private void Awake()
-    {
-        //HideAll();
-    }
-
     public void FillBar(float value)
     {
         _timerBar.fillAmount = value;
