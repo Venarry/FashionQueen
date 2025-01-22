@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 425149197e8275e4e81fec28605ebff4, type: 2}
   Mesh: {fileID: 4300002, guid: fca6b15930a55654f829f1affb6a36fb, type: 3}
-  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}
+  Icon: {fileID: 21300000, guid: f6e744bc20d79a949ac2570db75d8363, type: 3}

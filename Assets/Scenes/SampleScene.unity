@@ -7277,8 +7277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels:
-  - {fileID: 11400000, guid: 4735879dccb53dd449145c1f831908cb, type: 2}
   - {fileID: 11400000, guid: bac9d9315bbc995489852646beaab20c, type: 2}
+  - {fileID: 11400000, guid: 4735879dccb53dd449145c1f831908cb, type: 2}
   _clothPanelHandler: {fileID: 1106851697}
   _mainCharacter: {fileID: 6967804678350328583}
   _levelNameTextPanel: {fileID: 1074914426}
