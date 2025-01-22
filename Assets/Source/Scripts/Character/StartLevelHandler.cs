@@ -24,11 +24,15 @@ public class StartLevelHandler : MonoBehaviour
     public void Enable()
     {
         _enabled = true;
+
+        Show();
     }
 
     public void Disable()
     {
         _enabled = false;
+
+        Hide();
     }
 
     private void OnScreenClick()
@@ -42,6 +46,17 @@ public class StartLevelHandler : MonoBehaviour
         _player.CharacterMover.GoToStartPoint();
         _levelSpawner.SpawnNext();
         _cameraMovement.StartMovement();
+        Hide();
+    }
+
+    private void Show()
+    {
+        _clickMessage.SetActive(true);
+        _shopButton.SetActive(true);
+    }
+
+    private void Hide()
+    {
         _clickMessage.SetActive(false);
         _shopButton.SetActive(false);
     }

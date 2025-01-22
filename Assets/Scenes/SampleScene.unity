@@ -1282,6 +1282,7 @@ MonoBehaviour:
   _clickMessage: {fileID: 1322949982}
   _levelSpawner: {fileID: 649232362}
   _cameraMovement: {fileID: 963194229}
+  _shopButton: {fileID: 409935449}
 --- !u!1 &365027311
 GameObject:
   m_ObjectHideFlags: 0
@@ -7436,9 +7437,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4300004, guid: 0bacb22c40bed5e4386535ff84a617ff, type: 3}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Price>k__BackingField
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <Skirt>k__BackingField
       value: 
       objectReference: {fileID: 4300002, guid: 0bacb22c40bed5e4386535ff84a617ff, type: 3}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Locked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <DressMaterial>k__BackingField
       value: 
@@ -8316,6 +8325,7 @@ MonoBehaviour:
   _rateSmilesDataSource: {fileID: 1840623810}
   _walletView: {fileID: 1253705828}
   _rouletteHandler: {fileID: 184520950}
+  _shop: {fileID: 806451965}
   _playerMovePoints:
   - {fileID: 847248247}
   - {fileID: 1140723223}
@@ -12345,6 +12355,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4300004, guid: 8cb98a741ba5f454a9d46765d32ba9c8, type: 3}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Price>k__BackingField
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <Shoes>k__BackingField
       value: 
       objectReference: {fileID: 4300002, guid: 727c3f52182055d4285ba615bd148a7a, type: 3}
@@ -12352,6 +12366,10 @@ PrefabInstance:
       propertyPath: <Skirt>k__BackingField
       value: 
       objectReference: {fileID: 4300002, guid: 8cb98a741ba5f454a9d46765d32ba9c8, type: 3}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Locked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <DressMaterial>k__BackingField
       value: 
@@ -13531,9 +13549,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4300018, guid: ca51b473455fcc441b9780ca3a22af2e, type: 3}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Price>k__BackingField
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <Skirt>k__BackingField
       value: 
       objectReference: {fileID: 4300014, guid: ca51b473455fcc441b9780ca3a22af2e, type: 3}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Locked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <DressMaterial>k__BackingField
       value: 
@@ -14045,9 +14071,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4300016, guid: c88572b54567c9a479ab74998c7c0848, type: 3}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Price>k__BackingField
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <Skirt>k__BackingField
       value: 
       objectReference: {fileID: 4300014, guid: c88572b54567c9a479ab74998c7c0848, type: 3}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Locked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: <DressMaterial>k__BackingField
       value: 
@@ -14140,6 +14174,7 @@ MonoBehaviour:
   _cameraMovement: {fileID: 963194229}
   _playerRespawnPoint: {fileID: 1686745753}
   _clickMessage: {fileID: 1322949982}
+  _shopButton: {fileID: 0}
 --- !u!1001 &760724417192774952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14227,6 +14262,10 @@ PrefabInstance:
     - target: {fileID: 2699786686631500964, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155489037366990316, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
+      propertyPath: <Price>k__BackingField
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5293813922462640585, guid: 89114cd0ad740374481eda4a6ce6db67, type: 3}
       propertyPath: m_Sprite

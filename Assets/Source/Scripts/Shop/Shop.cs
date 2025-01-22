@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
@@ -10,6 +10,8 @@ public class Shop : MonoBehaviour
     private WalletModel _walletModel;
     private SaveHandler _saveHandler;
 
+    public int ActiveCloth { get; private set; } = 0;
+
     public void Init(WalletModel walletModel, SaveHandler saveHandler)
     {
         _walletModel = walletModel;
@@ -18,8 +20,11 @@ public class Shop : MonoBehaviour
 
     private void OnEnable()
     {
-        foreach (CharacterShopButton button in _characterButtons)
+        for (int i = 0; i < _characterButtons.Length; i++)
         {
+            CharacterShopButton button = _characterButtons[i];
+
+            button.SetIndex(i);
             button.Clicked += OnBuyClick;
         }
     }
@@ -32,6 +37,24 @@ public class Shop : MonoBehaviour
         }
     }
 
+    public void Load(bool[] data, int activeClothIndex)
+    {
+        for (int i = 0; i < _characterButtons.Length; i++)
+        {
+            if (data.Length <= i)
+            {
+                return;
+            }
+
+            if (data[i] == true)
+            {
+                _characterButtons[i].Unlock();
+            }
+        }
+
+        SetCloth(_characterButtons[activeClothIndex]);
+    }
+
     public void Show()
     {
         _parent.SetActive(true);
@@ -42,9 +65,40 @@ public class Shop : MonoBehaviour
         _parent.SetActive(false);
     }
 
+    public bool[] GetLockedData()
+    {
+        List<bool> data = new();
+
+        foreach (CharacterShopButton button in _characterButtons)
+        {
+            data.Add(button.Locked == false);
+        }
+
+        return data.ToArray();
+    }
+
     private void OnBuyClick(CharacterShopButton button)
+    {
+        if (button.Locked == true)
+        {
+            if (_walletModel.TryRemove(button.Price))
+            {
+                button.Unlock();
+                SetCloth(button);
+            }
+        }
+        else
+        {
+            SetCloth(button);
+        }
+    }
+
+    private void SetCloth(CharacterShopButton button)
     {
         _character.CharacterView.Set(1, button.DressMaterial, button.Dress, 1);
         _character.CharacterView.Set(2, button.SkirtMaterial, button.Skirt, 1);
+        ActiveCloth = button.ClothIndex;
+
+        _saveHandler.Save();
     }
 }
