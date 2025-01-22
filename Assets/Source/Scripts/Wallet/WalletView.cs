@@ -10,13 +10,14 @@ public class WalletView : MonoBehaviour
     public void Init(WalletModel walletModel)
     {
         _walletModel = walletModel;
-        OnValueChange();
     }
 
     public void Enable()
     {
         _walletModel.Added += OnValueChange;
         _walletModel.Removed += OnValueChange;
+
+        OnValueChange();
     }
 
     public void Disable()

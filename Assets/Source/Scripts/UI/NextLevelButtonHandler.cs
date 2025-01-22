@@ -9,6 +9,7 @@ public class NextLevelButtonHandler : MonoBehaviour
     [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private Transform _playerRespawnPoint;
     [SerializeField] private GameObject _clickMessage;
+    [SerializeField] private GameObject _shopButton;
 
     private Character _enemy;
 
@@ -42,7 +43,8 @@ public class NextLevelButtonHandler : MonoBehaviour
         _player.RateShower.OnRestartLevel();
         _player.CharacterView.SetStartCloth();
         _player.CharacterMover.OnLevelReset();
-        _clickMessage.gameObject.SetActive(true);
+        _clickMessage.SetActive(true);
+        _shopButton.SetActive(true);
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle, transitionDuration: 0);
 
         Destroy(_enemy.gameObject);

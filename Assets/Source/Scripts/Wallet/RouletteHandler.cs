@@ -42,6 +42,7 @@ public class RouletteHandler : MonoBehaviour
     private int _currentWalletValue = 0;
     private WalletModel _walletModel;
     private Coroutine _activeSlide;
+    private SaveHandler _saveHandler;
 
     private int Prise => Mathf.FloorToInt(_currentWalletValue * GetMoneyMultiplier());
 
@@ -50,6 +51,12 @@ public class RouletteHandler : MonoBehaviour
     private void Awake()
     {
         SpawnImages();
+    }
+
+    public void Init(WalletModel walletModel, SaveHandler saveHandler)
+    {
+        _walletModel = walletModel;
+        _saveHandler = saveHandler;
     }
 
     private void SpawnImages()
@@ -83,11 +90,6 @@ public class RouletteHandler : MonoBehaviour
         _getButton.onClick.RemoveListener(OnGetButtonClick);
     }
 
-    public void Init(WalletModel walletModel)
-    {
-        _walletModel = walletModel;
-    }
-
     public void Show(int baseValue)
     {
         DisableSlide();
@@ -109,6 +111,7 @@ public class RouletteHandler : MonoBehaviour
         _walletModel.Add(Prise);
 
         Debug.Log($"base {_currentWalletValue}; mult {multiplier}; itog {Prise}");
+        _saveHandler.Save();
 
         GetButtonClicked?.Invoke();
         Hide();

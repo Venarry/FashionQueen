@@ -26,4 +26,9 @@ public class WalletModel
 
         return false;
     }
+
+    public void LoadData(int money)
+    {
+        Value = money;
+    }
 }

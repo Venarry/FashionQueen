@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
 {
+    [SerializeField] private LevelSpawner _levelSpawner;
     [SerializeField] private ClothPanelHandler _clothPanelHandler;
     [SerializeField] private Character _player;
     [SerializeField] private StartPointHandler _startPointHandler;
@@ -19,11 +21,13 @@ public class EntryPoint : MonoBehaviour
     private void Awake()
     {
         WalletModel walletModel = new();
+        SaveHandler saveHandler = new(walletModel, _levelSpawner);
 
         _walletView.Init(walletModel);
         _player.Init(_playerMovePoints, _playerAttackPoint, _characterSpeed, _rateSmilesDataSource);
         _enemySpawner.Init(_rateSmilesDataSource, _enemyMovePoints, _enemyAttackPoint);
-        _rouletteHandler.Init(walletModel);
+        _rouletteHandler.Init(walletModel, saveHandler);
+        saveHandler.Load();
 
         _walletView.Enable();
         _clothPanelHandler.Enable();

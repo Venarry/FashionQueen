@@ -8,16 +8,16 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private CharacterView _mainCharacter;
     [SerializeField] private TextPanel _levelNameTextPanel;
 
-    private int _activeLevelIndex = 0;
+    public int ActiveLevelIndex { get; private set; } = 0;
 
     public void SpawnNext()
     {
-        if (_activeLevelIndex >= _levels.Length)
+        if (ActiveLevelIndex >= _levels.Length)
         {
-            _activeLevelIndex = 0;
+            ActiveLevelIndex = 0;
         }
 
-        LevelData level = _levels[_activeLevelIndex];
+        LevelData level = _levels[ActiveLevelIndex];
 
         _clothPanelHandler.SetData(new ClothWithRateData[][] 
         { 
@@ -40,11 +40,16 @@ public class LevelSpawner : MonoBehaviour
         _levelNameTextPanel.Set(level.LevelName);
         _levelNameTextPanel.Show();
 
-        _activeLevelIndex++;
+        ActiveLevelIndex++;
+    }
+
+    public void LoadData(int levelIndex)
+    {
+        ActiveLevelIndex = levelIndex;
     }
 
     public void ResetLevels()
     {
-        _activeLevelIndex = 0;
+        ActiveLevelIndex = 0;
     }
 }
