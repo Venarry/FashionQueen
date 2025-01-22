@@ -16,6 +16,7 @@ public class EndLevelHandler : MonoBehaviour
 
     [SerializeField] private HandRate _handPrefab;
     [SerializeField] private Transform[] _handPoints;
+    [SerializeField] private RouletteHandler _rouletteHandler;
 
     private readonly List<EndLevelActionButton> _spawnedButtons = new();
     private Character _enemy;
@@ -170,12 +171,23 @@ public class EndLevelHandler : MonoBehaviour
 
     private async void OnClick(EndLevelActionButton button)
     {
+        HideButtons();
+
         _player.Animator.ChangeAnimation(AnimationsName.GirlWalk);
         await _player.CharacterMover.GoToAttackPoint();
         _player.Animator.ChangeAnimation(button.ActionAnimationName);
         _enemy.Animator.ChangeAnimation(AnimationsName.GirlDieB);
 
-        HideButtons();
+        await Task.Delay(600);
+
+        _player.Animator.ChangeAnimation(AnimationsName.GirlDance);
+        _rouletteHandler.Show(_player.CharacterView.Rate.Values.Sum());
+        _rouletteHandler.GetButtonClicked += OnGetButtonClick;
+    }
+
+    private void OnGetButtonClick()
+    {
+        _rouletteHandler.GetButtonClicked -= OnGetButtonClick;
         EndLevel();
     }
 }

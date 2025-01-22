@@ -9,6 +9,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private RateSmilesDataSource _rateSmilesDataSource;
     [SerializeField] private WalletView _walletView;
+    [SerializeField] private RouletteHandler _rouletteHandler;
     [SerializeField] private Transform[] _playerMovePoints;
     [SerializeField] private Transform _playerAttackPoint;
     [SerializeField] private Transform[] _enemyMovePoints;
@@ -22,6 +23,7 @@ public class EntryPoint : MonoBehaviour
         _walletView.Init(walletModel);
         _player.Init(_playerMovePoints, _playerAttackPoint, _characterSpeed, _rateSmilesDataSource);
         _enemySpawner.Init(_rateSmilesDataSource, _enemyMovePoints, _enemyAttackPoint);
+        _rouletteHandler.Init(walletModel);
 
         _walletView.Enable();
         _clothPanelHandler.Enable();
