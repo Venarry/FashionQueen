@@ -20,6 +20,8 @@ public class CameraMovement : MonoBehaviour
     private bool _ended = false;
     private Coroutine _activeMoving;
     private bool _swipeLocked = true;
+    private bool _inShop = false;
+    private Vector3 _shopOffset = new Vector3(0, 0.4f, 0);
 
     private void Awake()
     {
@@ -42,12 +44,18 @@ public class CameraMovement : MonoBehaviour
 
     public void GoToShop()
     {
-        _swipeLocked = true;
-        _offset = _shopPoint.position;
+        _swipeLocked = false;
+        _inShop = true;
+        _offset = _swipePositions[0].position * 0.5f + _shopOffset;
     }
 
     public void GoToStartPosition()
     {
+        _swipeLocked = true;
+        _inShop = false;
+
+        _swipeCounter = 0;
+        GoToSwipePosition(_startGamePoint);
         _offset = _startGamePoint.position;
     }
 
@@ -72,7 +80,8 @@ public class CameraMovement : MonoBehaviour
             _swipeCounter = 0;
         }
 
-        GoToSwipePosition();
+        Transform currentSwipePoint = _swipePositions[_swipeCounter];
+        GoToSwipePosition(currentSwipePoint);
     }
 
     public void GoToPreviousSwipePosition()
@@ -90,16 +99,25 @@ public class CameraMovement : MonoBehaviour
             _swipeCounter = _swipePositions.Length - 1;
         }
 
-        GoToSwipePosition();
+        Transform currentSwipePoint = _swipePositions[_swipeCounter];
+        GoToSwipePosition(currentSwipePoint);
     }
 
-    private void GoToSwipePosition()
+    private void GoToSwipePosition(Transform target)
     {
-        Transform currentSwipePoint = _swipePositions[_swipeCounter];
         StopMoving();
 
-        _offset = currentSwipePoint.position;
-        _activeMoving = StartCoroutine(MovingTo(currentSwipePoint.position + GetCenter(), currentSwipePoint.rotation, 0.2f));
+        float multiplier = 1f;
+        Vector3 offset = Vector3.zero;
+
+        if(_inShop == true)
+        {
+            multiplier = 0.5f;
+            offset = _shopOffset;
+        }
+
+        _offset = target.position * multiplier + offset;
+        _activeMoving = StartCoroutine(MovingTo((target.position + GetCenter()) * multiplier + offset, target.rotation, 0.2f));
     }
 
     public void Add(Transform target)

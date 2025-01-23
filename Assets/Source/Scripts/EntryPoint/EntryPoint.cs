@@ -30,7 +30,7 @@ public class EntryPoint : MonoBehaviour
         _rouletteHandler.Init(walletModel, saveHandler);
         _shop.Init(walletModel, saveHandler);
         saveHandler.Load();
-        walletModel.Add(80);
+        //walletModel.Add(80);
 
         _walletView.Enable();
         _clothPanelHandler.Enable();
