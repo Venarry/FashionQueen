@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
   m_Name: AkiShoes
   m_EditorClassIdentifier: 
-  Rate: 1
   Material: {fileID: 2100000, guid: 93256f18d1c184e43a18d5be74242d80, type: 2}
   Mesh: {fileID: 4300008, guid: 0881002e47f92f240a6e8684d49eeee7, type: 3}
-  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}
+  Icon: {fileID: 21300000, guid: 396b3e07ac6fe694e8fab7a70ec80392, type: 3}

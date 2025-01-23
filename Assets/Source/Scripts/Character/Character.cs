@@ -11,9 +11,9 @@ public class Character : MonoBehaviour
     [field: SerializeField] public StringAnimator Animator { get; set; }
     [field: SerializeField] public CharacterRateShower RateShower { get; set; }
 
-    public void Init(Transform[] points, Transform attackPoint, float speed, RateSmilesDataSource rateSmilesDataSource)
+    public void Init(Transform[] points, Transform attackPoint, Transform roulettePoint, float speed, RateSmilesDataSource rateSmilesDataSource)
     {
-        CharacterMover.Init(points, attackPoint, speed);
+        CharacterMover.Init(points, attackPoint, roulettePoint, speed);
         RateShower.Init(rateSmilesDataSource);
     }
 }

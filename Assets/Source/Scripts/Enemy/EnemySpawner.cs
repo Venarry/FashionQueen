@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
             await Task.Delay(_projectionDespawnDelay);
         }
 
-        _activeCharacter.Init(_movePoints, _attackPoint, speed, _rateSmilesDataSource);
+        _activeCharacter.Init(_movePoints, _attackPoint, null, speed, _rateSmilesDataSource);
         return _activeCharacter;
     }
 

@@ -148,7 +148,7 @@ public class EndLevelHandler : MonoBehaviour
         {
             EndLevelActionButton button = Instantiate(_buttonPrefab, _choosePanel.ButtonsParent);
             button.Init(action.AnimationName, action.Icon);
-            button.Clicked += OnClick;
+            button.Clicked += OnActionClick;
 
             _spawnedButtons.Add(button);
         }
@@ -163,13 +163,14 @@ public class EndLevelHandler : MonoBehaviour
 
         foreach (EndLevelActionButton button in _spawnedButtons)
         {
+            button.Clicked -= OnActionClick;
             Destroy(button.gameObject);
         }
 
         _spawnedButtons.Clear();
     }
 
-    private async void OnClick(EndLevelActionButton button)
+    private async void OnActionClick(EndLevelActionButton button)
     {
         HideButtons();
 
@@ -179,6 +180,8 @@ public class EndLevelHandler : MonoBehaviour
         _enemy.Animator.ChangeAnimation(AnimationsName.GirlDieB);
 
         await Task.Delay(600);
+        _player.Animator.ChangeAnimation(AnimationsName.GirlWalk);
+        await _player.CharacterMover.GoToRoulettePoint();
 
         _player.Animator.ChangeAnimation(AnimationsName.GirlDance);
         _rouletteHandler.Show(_player.CharacterView.Rate.Values.Sum());

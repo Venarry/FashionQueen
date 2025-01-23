@@ -15,6 +15,7 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Shop _shop;
     [SerializeField] private Transform[] _playerMovePoints;
     [SerializeField] private Transform _playerAttackPoint;
+    [SerializeField] private Transform _playerRoulettePoint;
     [SerializeField] private Transform[] _enemyMovePoints;
     [SerializeField] private Transform _enemyAttackPoint;
     [SerializeField] private float _characterSpeed;
@@ -25,7 +26,7 @@ public class EntryPoint : MonoBehaviour
         SaveHandler saveHandler = new(walletModel, _levelSpawner, _shop);
 
         _walletView.Init(walletModel);
-        _player.Init(_playerMovePoints, _playerAttackPoint, _characterSpeed, _rateSmilesDataSource);
+        _player.Init(_playerMovePoints, _playerAttackPoint, _playerRoulettePoint, _characterSpeed, _rateSmilesDataSource);
         _enemySpawner.Init(_rateSmilesDataSource, _enemyMovePoints, _enemyAttackPoint);
         _rouletteHandler.Init(walletModel, saveHandler);
         _shop.Init(walletModel, saveHandler);

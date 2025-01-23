@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
   m_Name: AkiSkirt
   m_EditorClassIdentifier: 
-  Rate: 1
   Material: {fileID: 2100000, guid: ea26bec98b163ed4eb84e693aa85e265, type: 2}
   Mesh: {fileID: 4300002, guid: 0881002e47f92f240a6e8684d49eeee7, type: 3}
-  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}
+  Icon: {fileID: 21300000, guid: 1d88305d86bc8fc40ad15813152924a0, type: 3}

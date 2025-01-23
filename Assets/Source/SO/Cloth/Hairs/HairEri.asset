@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f915963327900fb4b8f14c056bace1c6, type: 3}
   m_Name: HairEri
   m_EditorClassIdentifier: 
-  Rate: 1
   Material: {fileID: 2100000, guid: d5bb9a5dd10de2c4096cb7108f160dcb, type: 2}
   Mesh: {fileID: 4300000, guid: ed95b9b1380fb1246ac1fffc0279a026, type: 3}
-  Icon: {fileID: 21300000, guid: af45d763fd48605459f0a607262faf37, type: 3}
+  Icon: {fileID: 21300000, guid: 181872d334c67e24cbf7309d1d3fab14, type: 3}

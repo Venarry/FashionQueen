@@ -7,6 +7,7 @@ public class CharacterMover : MonoBehaviour
     [SerializeField] private StringAnimator _characterAnimator;
     private Transform[] _movePoints;
     private Transform _attackPoint;
+    private Transform _roulettePoint;
     private float _moveSpeed = 3f;
 
     public Vector3 Position => transform.position;
@@ -17,10 +18,11 @@ public class CharacterMover : MonoBehaviour
     public event Action ReachedStartPoint;
     public event Action ReachedFinish;
 
-    public void Init(Transform[] points, Transform attackPoint, float speed)
+    public void Init(Transform[] points, Transform attackPoint, Transform roulettePoint, float speed)
     {
         _movePoints = points;
         _attackPoint = attackPoint;
+        _roulettePoint = roulettePoint;
         _moveSpeed = speed;
     }
 
@@ -65,6 +67,11 @@ public class CharacterMover : MonoBehaviour
     public async Task GoToAttackPoint()
     {
         await GoToPoint(_attackPoint, isLookAtPoint: true);
+    }
+
+    public async Task GoToRoulettePoint()
+    {
+        await GoToPoint(_roulettePoint, isLookAtPoint: true);
     }
 
     public void OnLevelReset()
