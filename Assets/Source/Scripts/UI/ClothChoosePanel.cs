@@ -5,6 +5,7 @@ public class ClothChoosePanel : MonoBehaviour
 {
     [field: SerializeField] public Transform ButtonsParent { get; private set; }
     [SerializeField] private Image _timerBar;
+    [SerializeField] private GameObject _timerParent;
 
     public void FillBar(float value)
     {
@@ -24,12 +25,14 @@ public class ClothChoosePanel : MonoBehaviour
 
     public void ShowTimer()
     {
-        _timerBar.gameObject.SetActive(true);
+        _timerParent.SetActive(true);
+        //_timerBar.gameObject.SetActive(true);
     }
 
     public void HideAll()
     {
-        _timerBar.gameObject.SetActive(false);
+        _timerParent.SetActive(false);
+        //_timerBar.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
 }

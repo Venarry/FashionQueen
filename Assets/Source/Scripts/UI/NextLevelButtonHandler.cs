@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class NextLevelButtonHandler : MonoBehaviour
 {
@@ -48,5 +49,7 @@ public class NextLevelButtonHandler : MonoBehaviour
         _player.Animator.ChangeAnimation(AnimationsName.GirlIdle, transitionDuration: 0);
 
         Destroy(_enemy.gameObject);
+
+        YandexGame.FullscreenShow();
     }
 }

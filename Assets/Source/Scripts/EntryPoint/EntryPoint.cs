@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YG;
 
 public class EntryPoint : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
+        YandexGame.FullscreenShow();
+
         WalletModel walletModel = new();
         SaveHandler saveHandler = new(walletModel, _levelSpawner, _shop);
 
