@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -26,52 +27,44 @@ public class CharacterMover : MonoBehaviour
         _moveSpeed = speed;
     }
 
-    public async void GoToStartPoint()
+    public IEnumerator GoToStartPoint()
     {
-        try
-        {
-            IsStarted = true;
-            _characterAnimator.ChangeAnimation(AnimationsName.GirlWalk);
-            await GoToPoint(_movePoints[0]);
+        IsStarted = true;
+        _characterAnimator.ChangeAnimation(AnimationsName.GirlWalk);
+        yield return StartCoroutine(GoToPoint(_movePoints[0]));
 
-            _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
-            ReachedStartPoint?.Invoke();
-        }
-        catch { }
+        _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
+        ReachedStartPoint?.Invoke();
     }
 
-    public async void Go()
+    public IEnumerator Go()
     {
         _characterAnimator.ChangeAnimation(AnimationsName.GirlWalk);
 
         for (int i = 1; i < _movePoints.Length; i++)
         {
-            try
+            yield return StartCoroutine(GoToPoint(_movePoints[i]));
+
+            if(i < _movePoints.Length - 1)
             {
-                await GoToPoint(_movePoints[i]);
-
-                if(i < _movePoints.Length - 1)
-                {
-                    ReachedNewStage?.Invoke();
-                    continue;
-                }
-
-                _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
-
-                ReachedFinish?.Invoke();
+                ReachedNewStage?.Invoke();
+                continue;
             }
-            catch { }
+
+            _characterAnimator.ChangeAnimation(AnimationsName.GirlIdle);
+
+            ReachedFinish?.Invoke();
         }
     }
 
-    public async Task GoToAttackPoint()
+    public IEnumerator GoToAttackPoint()
     {
-        await GoToPoint(_attackPoint, isLookAtPoint: true);
+        yield return StartCoroutine(GoToPoint(_attackPoint, isLookAtPoint: true));
     }
 
-    public async Task GoToRoulettePoint()
+    public IEnumerator GoToRoulettePoint()
     {
-        await GoToPoint(_roulettePoint, isLookAtPoint: true);
+        yield return StartCoroutine(GoToPoint(_roulettePoint, isLookAtPoint: true));
     }
 
     public void OnLevelReset()
@@ -79,7 +72,7 @@ public class CharacterMover : MonoBehaviour
         IsStarted = false;
     }
 
-    private async Task GoToPoint(Transform point, bool isLookAtPoint = false)
+    private IEnumerator GoToPoint(Transform point, bool isLookAtPoint = false)
     {
         float minMagnitude = 0.05f;
         float rotationSpeed = 300f;
@@ -94,7 +87,7 @@ public class CharacterMover : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAtPoint, rotationSpeed * Time.deltaTime);
             }
 
-            await Task.Yield();
+            yield return null;
         }
     }
 }

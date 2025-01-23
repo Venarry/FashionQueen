@@ -1,5 +1,4 @@
-using System;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 public class StartPointHandler : MonoBehaviour
@@ -11,7 +10,7 @@ public class StartPointHandler : MonoBehaviour
     [SerializeField] private EndLevelHandler _endLevelHandler;
     [SerializeField] private NextLevelButtonHandler _nextLevelButtonHandler;
 
-    private readonly int _actionsDelay = 500;
+    private readonly float _actionsDelay = 0.5f;
     private Character _enemy;
 
     public void Enable()
@@ -24,34 +23,37 @@ public class StartPointHandler : MonoBehaviour
         _playerMover.ReachedStartPoint -= OnStartPointReach;
     }
 
-    private async void OnStartPointReach()
+    private void OnStartPointReach()
     {
-        try
-        {
-            await Task.Delay(_actionsDelay);
+        StartCoroutine(StartLevel());
+    }
 
-            Vector3 enemySpawnPosition = new(_playerMover.Position.x * -1, _playerMover.Position.y, _playerMover.Position.z);
-            GameObject cameraFollowGameobject = new("EnemyPosition");
-            cameraFollowGameobject.transform.position = enemySpawnPosition;
-            _targetFollower.Add(cameraFollowGameobject.transform);
+    private IEnumerator StartLevel()
+    {
+        yield return new WaitForSecondsRealtime(_actionsDelay);
 
-            _enemy = await _enemySpawner.SpawnWithProjection(enemySpawnPosition, Quaternion.identity, _playerMover.MoveSpeed);
+        Vector3 enemySpawnPosition = new(_playerMover.Position.x * -1, _playerMover.Position.y, _playerMover.Position.z);
+        GameObject cameraFollowGameobject = new("EnemyPosition");
+        cameraFollowGameobject.transform.position = enemySpawnPosition;
+        _targetFollower.Add(cameraFollowGameobject.transform);
 
-            _targetFollower.Remove(cameraFollowGameobject.transform);
-            Destroy(cameraFollowGameobject);
-            _clothPanelHandler.SetEnemy(_enemy);
-            _endLevelHandler.SetEnemy(_enemy);
-            _nextLevelButtonHandler.SetEnemy(_enemy);
-            _targetFollower.Add(_enemy.transform);
+        yield return StartCoroutine(_enemySpawner.SpawnWithProjection(enemySpawnPosition, Quaternion.identity, _playerMover.MoveSpeed, SetEnemy));
 
-            await Task.Delay(_actionsDelay);
+        _targetFollower.Remove(cameraFollowGameobject.transform);
+        Destroy(cameraFollowGameobject);
+        _clothPanelHandler.SetEnemy(_enemy);
+        _endLevelHandler.SetEnemy(_enemy);
+        _nextLevelButtonHandler.SetEnemy(_enemy);
+        _targetFollower.Add(_enemy.transform);
 
-            _playerMover.Go();
-            _enemy.CharacterMover.Go();
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex);
-        }
+        yield return new WaitForSecondsRealtime(_actionsDelay);
+
+        StartCoroutine(_playerMover.Go());
+        StartCoroutine(_enemy.CharacterMover.Go());
+    }
+
+    private void SetEnemy(Character character)
+    {
+        _enemy = character;
     }
 }

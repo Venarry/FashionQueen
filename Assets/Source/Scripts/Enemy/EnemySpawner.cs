@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform _attackPoint;
     private Character _activeCharacter;
     private RateSmilesDataSource _rateSmilesDataSource;
-    private readonly int _projectionDespawnDelay = 1000;
+    private readonly int _projectionDespawnDelay = 1;
 
     public void Init(RateSmilesDataSource rateSmilesDataSource, Transform[] points, Transform attackPoint)
     {
@@ -20,16 +22,13 @@ public class EnemySpawner : MonoBehaviour
         _attackPoint = attackPoint;
     }
 
-    public async Task<Character> SpawnWithProjection(Vector3 position, Quaternion rotation, float speed)
+    public IEnumerator SpawnWithProjection(Vector3 position, Quaternion rotation, float speed, Action<Character> callback)
     {
         int prefabsForShowCount = 4;
         int[] randomValues = GetRandomValues(prefabsForShowCount, 0, _prefabs.Length);
 
         for (int i = 0; i < randomValues.Length; i++)
         {
-            if (Application.isPlaying == false)
-                return null;
-
             if (_activeCharacter != null)
             {
                 Destroy(_activeCharacter.gameObject);
@@ -38,11 +37,11 @@ public class EnemySpawner : MonoBehaviour
             Character prefab = _prefabs[randomValues[i]];
             _activeCharacter = Instantiate(prefab, position, rotation);
 
-            await Task.Delay(_projectionDespawnDelay);
+            yield return new WaitForSecondsRealtime(_projectionDespawnDelay);
         }
 
         _activeCharacter.Init(_movePoints, _attackPoint, null, speed, _rateSmilesDataSource);
-        return _activeCharacter;
+        callback?.Invoke(_activeCharacter);
     }
 
     private int[] GetRandomValues(int count, int min, int max)

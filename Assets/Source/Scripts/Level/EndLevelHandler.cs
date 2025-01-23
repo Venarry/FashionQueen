@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,17 +36,22 @@ public class EndLevelHandler : MonoBehaviour
         _player.CharacterMover.ReachedFinish -= OnFinishReach;
     }
 
-    private async void OnFinishReach()
+    private void OnFinishReach()
+    {
+        StartCoroutine(Finish());
+    }
+
+    private IEnumerator Finish()
     {
         int playerRate = _player.CharacterView.Rate.Values.Sum();
         int enemyRate = _enemy.CharacterView.Rate.Values.Sum();
 
-        await ShowCharacterClothRate(_player, playerRate);
-        await ShowCharacterClothRate(_enemy, enemyRate);
+        yield return StartCoroutine(ShowCharacterClothRate(_player, playerRate));
+        yield return StartCoroutine(ShowCharacterClothRate(_enemy, enemyRate));
 
         _camera.GoNext();
 
-        await Task.Delay(500);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         _player.RateShower.HideAll();
         _enemy.RateShower.HideAll();
@@ -55,10 +60,10 @@ public class EndLevelHandler : MonoBehaviour
 
         bool playerIsWin = TryWinPlayer(playerRate, enemyRate);
 
-        HandleAttackAction(playerIsWin);
+        StartCoroutine(HandleAttackAction(playerIsWin));
     }
 
-    private async void HandleAttackAction(bool playerIsWin)
+    private IEnumerator HandleAttackAction(bool playerIsWin)
     {
         if (playerIsWin == true)
         {
@@ -67,7 +72,7 @@ public class EndLevelHandler : MonoBehaviour
         else
         {
             _enemy.Animator.ChangeAnimation(AnimationsName.GirlWalk);
-            await _enemy.CharacterMover.GoToAttackPoint();
+            yield return StartCoroutine(_enemy.CharacterMover.GoToAttackPoint());
 
             EndLevelActionSO randomAction = _actions[Random.Range(0, _actions.Count)];
             _enemy.Animator.ChangeAnimation(randomAction.AnimationName);
@@ -91,23 +96,23 @@ public class EndLevelHandler : MonoBehaviour
         return false;
     }
 
-    private async Task ShowCharacterClothRate(Character character, int rate)
+    private IEnumerator ShowCharacterClothRate(Character character, int rate)
     {
         _camera.GoNext();
-        await Task.Delay(500);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         for (int i = 0; i < character.RateShower.RateCount; i++)
         {
             character.RateShower.ShowNext();
-            await Task.Delay(1000);
+            yield return new WaitForSecondsRealtime(1);
         }
 
-        await ShowHandsWithRates(character, rate);
+        yield return StartCoroutine(ShowHandsWithRates(character, rate));
 
-        await Task.Delay(2000);
+        yield return new WaitForSecondsRealtime(2);
     }
 
-    private async Task ShowHandsWithRates(Character character, int rate)
+    private IEnumerator ShowHandsWithRates(Character character, int rate)
     {
         Dictionary<int, int> rates = character.CharacterView.Rate;
         List<HandRate> hands = new();
@@ -120,12 +125,12 @@ public class EndLevelHandler : MonoBehaviour
             hand.Show();
 
             hands.Add(hand);
-            await Task.Delay(600);
+            yield return new WaitForSecondsRealtime(0.6f);
         }
 
         character.RateShower.ShowRateSum(rate);
 
-        await Task.Delay(1000);
+        yield return new WaitForSecondsRealtime(1);
 
         foreach (HandRate hand in hands)
         {
@@ -170,18 +175,24 @@ public class EndLevelHandler : MonoBehaviour
         _spawnedButtons.Clear();
     }
 
-    private async void OnActionClick(EndLevelActionButton button)
+    private void OnActionClick(EndLevelActionButton button)
+    {
+        StartCoroutine(HandleActionClick(button));
+    }
+
+    private IEnumerator HandleActionClick(EndLevelActionButton button)
     {
         HideButtons();
 
         _player.Animator.ChangeAnimation(AnimationsName.GirlWalk);
-        await _player.CharacterMover.GoToAttackPoint();
+        yield return StartCoroutine(_player.CharacterMover.GoToAttackPoint());
         _player.Animator.ChangeAnimation(button.ActionAnimationName);
         _enemy.Animator.ChangeAnimation(AnimationsName.GirlDieB);
 
-        await Task.Delay(600);
+        yield return new WaitForSecondsRealtime(0.6f);
+
         _player.Animator.ChangeAnimation(AnimationsName.GirlWalk);
-        await _player.CharacterMover.GoToRoulettePoint();
+        yield return StartCoroutine(_player.CharacterMover.GoToRoulettePoint());
 
         _player.Animator.ChangeAnimation(AnimationsName.GirlDance);
         _rouletteHandler.Show(_player.CharacterView.Rate.Values.Sum());

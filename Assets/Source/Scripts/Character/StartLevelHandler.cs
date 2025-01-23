@@ -43,7 +43,7 @@ public class StartLevelHandler : MonoBehaviour
         if (_player.CharacterMover.IsStarted == true)
             return;
 
-        _player.CharacterMover.GoToStartPoint();
+        StartCoroutine(_player.CharacterMover.GoToStartPoint());
         _levelSpawner.SpawnNext();
         _cameraMovement.StartMovement();
         Hide();
