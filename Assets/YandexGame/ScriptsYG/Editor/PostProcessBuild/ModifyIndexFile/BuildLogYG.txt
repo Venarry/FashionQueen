@@ -1,2 +1,2 @@
 Build path: E:/UnityGames/FashionQueen/WebBuild
-Build number: 4
+Build number: 6
