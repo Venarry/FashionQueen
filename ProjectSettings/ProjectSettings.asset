@@ -745,6 +745,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: YG_PLUGIN_YANDEX_GAME
     Standalone: UNITY_PIPELINE_URP
+    WebGL: YG_PLUGIN_YANDEX_GAME
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
